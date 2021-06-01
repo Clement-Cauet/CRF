@@ -8,6 +8,7 @@
         private $_mdp;
         private $_nom;
         private $_prenom;
+        private $_admin;
         private $_bdd;
 
         /* METHOD */
@@ -15,19 +16,20 @@
             $this->_bdd = $bdd;
         }
 
-        public function setUser($nivol ,$login, $mdp, $nom, $prenom){
+        public function setUser($nivol ,$login, $mdp, $nom, $prenom, $admin){
             $this->_nivol = $nivol;
             $this->_login = $login;
             $this->_mdp = $mdp;
             $this->_nom = $nom;
             $this->_prenom = $prenom;
+            $this->_admin = $admin;
         }
 
         public function setUserByNivol($nivol){
             $req = "SELECT * FROM `User` WHERE `nivol`='".$nivol."'";
             $Result = $this->_bdd->query($req);
             if($tab = $Result->fetch()){ 
-                $this->setUser($tab["nivol"], $tab["login"], $tab["mdp"], $tab["nom"], $tab["prenom"]);
+                $this->setUser($tab["nivol"], $tab["login"], $tab["mdp"], $tab["nom"], $tab["prenom"], $tab["admin"]);
             }
         }
 
@@ -37,6 +39,10 @@
 
         public function getPrenom(){
             return $this->_prenom;
+        }
+
+        public function getAdmin(){
+            return $this->_admin;
         }
 
         public function connexion(){

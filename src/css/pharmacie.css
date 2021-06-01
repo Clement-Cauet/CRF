@@ -10,11 +10,14 @@
     position: relative;
     float: right;
     margin-right: 10%;
+    border: 1px solid;
+    border-radius: 3px;
 }
 
 .forms-control {
     width: 300px;
     height: 30px;
+    border: none; 
 }
 
 .btn-primary {
@@ -22,8 +25,7 @@
     height: 30px;
     color: gray;
     background-color: white;
-    border-width: 1px;
-    border-radius: 3px;
+    border: none;   
 }
 
 /*Bouttons*/
@@ -122,6 +124,16 @@ tbody td {
     height: 30px;
     line-height: center;
     text-align: center;
+    text-decoration: none;
+}
+
+tbody td a:hover {
+    color: #CC0000;
+}
+
+tbody td a {
+    color: black;
+    text-decoration: none;
 }
   
 tbody tr:nth-child(odd) {

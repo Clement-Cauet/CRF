@@ -8,6 +8,8 @@
     $mdp = "";
     $bdd = new PDO('mysql:host=localhost; dbname=crf; charset=utf8', $login, $mdp);
 
+    $inventaire = new inventaire($bdd);
+
     $user = new user($bdd);
 
     if (isset($_SESSION["Connected"]) && $_SESSION["Connected"] == true){

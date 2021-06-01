@@ -31,6 +31,23 @@
                     <i class="far fa-clock"></i>
                 </a>
             </li>
+            <li>
+                <a href="commande.php">
+                    <i class="far fa-clipboard"></i>
+                </a>
+            </li>
+            <?php 
+                $admin = $user->getAdmin();
+                if($admin == 1){
+                    ?>
+                        <li>
+                            <a href="parametre.php">
+                                <i class="fas fa-user-cog"></i>
+                            </a>
+                        </li>
+                    <?php
+                } 
+            ?>
         </ul>
         <ul class="navbar-droite">
             <div class="dropdown">
