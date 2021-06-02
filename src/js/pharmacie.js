@@ -1,28 +1,37 @@
-var update = document.getElementById('update');
-var save = document.getElementById('save');
-var cancel = document.getElementById('cancel');
+/*for(var i=0; i<3; i++){
 
-save.hidden = true;
-cancel.hidden = true;
-for(var i=0; i<3; i++){
-    document.getElementsByClassName('quantiteView')[i].hidden = false;
-    document.getElementsByClassName('quantiteNumber')[i].hidden = true;
-}
-
-update.addEventListener('click', function() {
-    save.hidden = false;
-    cancel.hidden = false;
-    for(var i=0; i<3; i++){
-        document.getElementsByClassName('quantiteView')[i].hidden = true;
-        document.getElementsByClassName('quantiteNumber')[i].hidden = false;
-    }
-    cancel.addEventListener('click', function() {
-        save.hidden = true;
-        cancel.hidden = true;
-        for(var i=0; i<3; i++){
-            document.getElementsByClassName('quantiteView')[i].hidden = false;
-            document.getElementsByClassName('quantiteNumber')[i].hidden = true;
+    quantite.addEventListener('change', function(){
+        try{
+            fetch('src/api/update.php', {
+                method: 'post'
+            }).then(function(response){
+                return response.json();        
+            }).then(function (data){
+                var obj = {"etat": data};
+                console.log(JSON.parse(JSON.stringify(obj)));
+            })
+        }catch (error){
+            console.error(error);
         }
-    }); 
-});
+    });
+}*/
 
+for(var i=0; i<3; i++){
+
+    var quantite = document.getElementsByClassName('quantite')[i];
+    var quantiteValue = document.getElementsByClassName('quantite')[i].value;
+    var id = document.getElementsByClassName('id')[i].innerHTML;
+
+    var decrement = document.getElementsByClassName('decrement')[i];
+    var increment = document.getElementsByClassName('increment')[i];
+
+    decrement.addEventListener('click', function(){
+        quantiteValue--;
+        quantite.value = quantiteValue;
+        alert('coucou');
+    });
+    increment.addEventListener('click', function(){
+        quantiteValue++;
+        quantite.value = quantiteValue;
+    });
+}

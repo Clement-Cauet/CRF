@@ -144,6 +144,28 @@ tbody tr:nth-child(even) {
     background-color: white;
 }
 
+input::-webkit-outer-spin-button, input::-webkit-inner-spin-button, input[type=number] {
+    -webkit-appearance: none;
+    -moz-appearance: textfield;
+    margin: 0;
+}
+
+.quantite {
+    width: 40px;
+    text-align: center;
+    background-color : rgba(255, 255, 255, 0);
+    border-collapse: collapse;
+    border: none;
+}
+
+.increment, .decrement {
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    border: none;
+    border-radius: 50px;
+}
+
 @media screen and (max-width: 950px) {
     .forms-group {
         position: relative;

@@ -42,14 +42,22 @@
                 }else{
                     ?><tr><?php
                 }                        
-                    ?>  
-                        <form method="post">
-                            <td><?php echo $tab['id']; ?></td>
-                            <td><?php echo $tab['nom']; ?></td>
-                            <td class="quantiteView"><?php echo $tab['quantite']; ?></td>
-                            <td class="quantiteNumber"><input type="number" value="<?php echo $tab['quantite']; ?>"></td>
-                            <td><?php echo $tab['quantiteMin']; ?></td>  
-                        </form>              
+                    ?>
+                        <td class="id"><?php echo $tab['id']; ?></td>
+                        <td><?php echo $tab['nom']; ?></td>
+                        <td>
+                            <button class="decrement">-</button>
+                            <?php
+                                if($tab['quantite'] < $tab['quantiteMin']){
+                                    
+                                    ?><input type="number" class="quantite" style="color: #CC0000; font-weight: bold" value="<?php echo $tab['quantite']; ?>"><?php
+                                }else{
+                                    ?><input type="number" class="quantite" value="<?php echo $tab['quantite']; ?>"><?php
+                                }
+                            ?>
+                            <button class="increment">+</button>
+                        </td>
+                        <td><?php echo $tab['quantiteMin']; ?></td>
                     </tr>
                 <?php
             }

@@ -19,11 +19,6 @@
             include("menu.php");
         ?>
         <div class="back">
-            <div class="boutton">
-                <input type="submit" id="update" name="update" class="update" value="Modifier">
-                <input type="submit" id="save" name="save" class="save" value="Enregistrer">
-                <input type='submit' id="cancel" name="cancel" class="cancel" value="Annuler">
-            </div>
             <table>
                 <thead>
                     <tr>
