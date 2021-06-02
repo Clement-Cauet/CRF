@@ -1,36 +1,33 @@
-/*for(var i=0; i<3; i++){
+function reduce ( e ) {
 
-    quantite.addEventListener('change', function(){
-        try{
-            fetch('src/api/update.php', {
-                method: 'post'
-            }).then(function(response){
-                return response.json();        
-            }).then(function (data){
-                var obj = {"etat": data};
-                console.log(JSON.parse(JSON.stringify(obj)));
-            })
-        }catch (error){
-            console.error(error);
-        }
+    const element = e.parentNode.querySelector('input[type=number]')
+    element.stepDown()
+    element.style.color = element.value < parseInt(element.parentNode.dataset.min)
+        ? "#CC0000" : "#939393"
+    update( e.parentNode.id, element.value )
+
+}
+
+function add ( e ) {
+
+    const element = e.parentNode.querySelector('input[type=number]');
+    element.stepUp();
+
+    element.style.color = element.value < parseInt(element.parentNode.dataset.min)
+        ? "#CC0000" : "#939393"
+
+    update( e.parentNode.id, element.value );
+
+}
+
+function update ( id, quantity ) {
+
+    fetch("./src/api/update.php", {
+        method: "post",
+        body: JSON.stringify({
+            id      : id,
+            quantity: quantity
+        })
     });
-}*/
 
-for(var i=0; i<3; i++){
-
-    var quantite = document.getElementsByClassName('quantite')[i];
-    var quantiteValue = document.getElementsByClassName('quantite')[i].value;
-    var id = document.getElementsByClassName('id')[i].innerHTML;
-
-    var decrement = document.getElementsByClassName('decrement')[i];
-    var increment = document.getElementsByClassName('increment')[i];
-
-    decrement.addEventListener('click', function(){
-        quantiteValue--;
-        quantite.value = quantiteValue;
-    });
-    increment.addEventListener('click', function(){
-        quantiteValue++;
-        quantite.value = quantiteValue;
-    });
 }
