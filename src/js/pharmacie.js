@@ -28,7 +28,6 @@ for(var i=0; i<3; i++){
     decrement.addEventListener('click', function(){
         quantiteValue--;
         quantite.value = quantiteValue;
-        alert('coucou');
     });
     increment.addEventListener('click', function(){
         quantiteValue++;
