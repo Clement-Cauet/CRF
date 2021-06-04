@@ -90,8 +90,18 @@
                         <div id="gestionVestiaire" class="gestion">
                             <?php $inventaire->select('pharmacie'); ?>
                         </div>
-                        <script type="text/javascript" src="src/js/parametre.js"></script>                     
+                        <script type="text/javascript" src="src/js/parametre.js"></script>
                     </div>
+
+                    <script>
+
+                        ( async () => {
+                            console.log( await count( "user" ) );
+                        })();
+
+                     </script>
+
+
                 <?php
             }else{
                 ?>
@@ -104,8 +114,8 @@
                 <?php
             }
         ?>
-    </body> 
+    </body>
 <?php
     }
-?>            
+?>
 </html>

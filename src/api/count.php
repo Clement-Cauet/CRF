@@ -12,8 +12,8 @@
     // —— Transforms the character string into a JSON object
     $data = json_decode($content, true);
 
-    $req = "SELECT COUNT(*) FROM $data";
-    $Result = $bdd->query($req);
+    $req = "SELECT COUNT(1) FROM $data[table]";
+    $Result = $bdd->query($req)->fetch();
 
     echo json_encode($Result);
 

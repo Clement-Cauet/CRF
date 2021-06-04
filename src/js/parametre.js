@@ -69,17 +69,14 @@ retour.addEventListener('click', function(){
 
 /* Insert, Update, Delete, Cancel */
 var nbr;
-function count(table, nbr) {
-    fetch("./src/api/count.php", {
+function count( table ) {
+    return fetch("./src/api/count.php", {
         method: "post",
         body: JSON.stringify({
             table : table
         })
-    }).then(function(response){
-        return response.json();        
-    }).then(function (data){
-        nbr = data
-    });
+    }).then( ( res ) => { return res.json() }
+    ).then( ( data ) => { return data } );
 }
 
 document.getElementById('cancel').hidden = true;
