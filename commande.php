@@ -19,21 +19,18 @@
             include("menu.php");
         ?>
         <div class="back">
-            <table>
-                <thead>
-                    <tr>
-                        <td>ID</td>
-                        <td>Nom</td>
-                        <td>Localisation</td>
-                        <td>Quantité</td>
-                        <td>Quantité Minimum</td>
-                        <td>Quantité Manquante</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php $inventaire->commande(); ?>
-                </tbody>
-            </table>
+            <div>
+                <h2>Pharmacie</h2>
+                <?php $inventaire->commande('pharmacie'); ?>
+            </div>
+            <div>
+                <h2>Base log</h2>
+                <?php $inventaire->commande('base_log'); ?>
+            </div>
+            <div>
+                <h2>Vestiaire</h2>
+                <?php $inventaire->commande('vestiaire'); ?>
+            </div>
         </div>
     </body> 
 <?php

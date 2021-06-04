@@ -38,7 +38,7 @@
             </li>
             <?php 
                 $admin = $user->getAdmin();
-                if($admin == 1){
+                if($admin == 'Oui'){
                     ?>
                         <li>
                             <a href="parametre.php">

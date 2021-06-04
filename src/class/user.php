@@ -10,6 +10,7 @@
         private $_prenom;
         private $_admin;
         private $_bdd;
+        private $_req;
 
         /* METHOD */
         public function __construct($bdd){
@@ -103,6 +104,72 @@
             session_destroy();
             unset($_POST);
             header("Refresh:0");
+        }
+
+        public function searchBar(){
+            if(isset($_GET['search'])){
+                $search = $_GET['search'];
+                $this->_req .= " AND nom LIKE '$search%'";
+            }
+            ?>
+                <form method="get">
+                    <div class="forms-group">
+                        <input type="text" class="forms-control" name="search" placeholder="Rechercher par nom">
+                        <button class="btn btn-primary">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </form>
+            <?php
+        }
+
+        public function selectUser(){
+            $this->_req = "SELECT `nivol`, `nom`, `prenom`, `admin` FROM `user` WHERE 1";
+            $this->searchBar();
+            $Result = $this->_bdd->query($this->_req);
+            ?>
+                <table>
+                    <thead>
+                        <tr>
+                            <td>Nivol</td>
+                            <td>Nom</td>
+                            <td>Prénom</td>
+                            <td>Admin</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php while($tab = $Result->fetch()){ ?>
+                            <tr>
+                                <td class="nivol">
+                                    <div class="data"><?php echo $tab['nivol']; ?></div>
+                                    <input type="text" class="inputUpdate" value="<?php echo $tab['nivol']; ?>">
+                                </td>
+                                <td>
+                                    <div class="data"><?php echo $tab['nom']; ?></div>
+                                    <input type="text" class="inputUpdate" value="<?php echo $tab['nom']; ?>">
+                                </td>
+                                <td>
+                                    <div class="data"><?php echo $tab['prenom']; ?></div>
+                                    <input type="text" class="inputUpdate" value="<?php echo $tab['prenom']; ?>">
+                                </td>
+                                <td>
+                                    <div class="data"><?php echo $tab['admin']; ?></div>
+                                    <select class="inputUpdate">
+                                        <option value=""></option>
+                                        <option value="Oui">Oui</option>
+                                        <option value="Non">Non</option>
+                                    </select>
+                                </td>
+                                <td class="tabCheckbox">
+                                    <input type="checkbox" name="checkbox[]" value="<?php echo $tab['nivol'] ?>">
+                                </td>
+                            </tr>
+                        <?php
+                        }
+                        ?>
+                    </tbody>
+                </table>
+            <?php
         }
     }
 

@@ -19,19 +19,8 @@
             include("menu.php");
         ?>
         <div class="back">
-            <table>
-                <thead>
-                    <tr>
-                        <td>ID</td>
-                        <td>Nom</td>
-                        <td>Quantité</td>
-                        <td>Quantité Minimum</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php $inventaire->selectPharmacie(); ?>
-                </tbody>
-            </table>
+            <h2>Pharmacie</h2>
+            <?php $inventaire->select('pharmacie'); ?>
             <script type="text/javascript" src="src/js/pharmacie.js"></script>
         </div>
     </body> 
