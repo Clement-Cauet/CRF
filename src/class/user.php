@@ -139,29 +139,18 @@
                     </thead>
                     <tbody>
                         <?php while($tab = $Result->fetch()){ ?>
-                            <tr>
-                                <td class="nivol">
-                                    <div class="data"><?php echo $tab['nivol']; ?></div>
-                                    <input type="text" class="inputUpdate" value="<?php echo $tab['nivol']; ?>">
+                            <tr id="<?php echo $tab['nivol']; ?>">
+                                <td onclick="tablelink(this)">
+                                    <div><?php echo $tab['nivol']; ?></div>
                                 </td>
-                                <td>
-                                    <div class="data"><?php echo $tab['nom']; ?></div>
-                                    <input type="text" class="inputUpdate" value="<?php echo $tab['nom']; ?>">
+                                <td onclick="tablelink(this)">
+                                    <div><?php echo $tab['nom']; ?></div>
                                 </td>
-                                <td>
-                                    <div class="data"><?php echo $tab['prenom']; ?></div>
-                                    <input type="text" class="inputUpdate" value="<?php echo $tab['prenom']; ?>">
+                                <td onclick="tablelink(this)">
+                                    <div><?php echo $tab['prenom']; ?></div>
                                 </td>
-                                <td>
-                                    <div class="data"><?php echo $tab['admin']; ?></div>
-                                    <select class="inputUpdate">
-                                        <option value=""></option>
-                                        <option value="Oui">Oui</option>
-                                        <option value="Non">Non</option>
-                                    </select>
-                                </td>
-                                <td class="tabCheckbox">
-                                    <input type="checkbox" name="checkbox[]" value="<?php echo $tab['nivol'] ?>">
+                                <td onclick="tablelink(this)">
+                                    <div><?php echo $tab['admin']; ?></div>
                                 </td>
                             </tr>
                         <?php
@@ -170,6 +159,32 @@
                     </tbody>
                 </table>
             <?php
+        }
+
+        public function formUser($nivol){
+            $this->_req = "SELECT `nivol`, `nom`, `prenom`, `admin` FROM `user` WHERE `nivol`= $nivol";
+            $Result = $this->_bdd->query($this->_req);
+            while($tab = $Result->fetch()){
+                ?>
+                    <form method="post">
+                        <input type="text" value="<?php echo $tab['nivol']; ?>">
+                        <input type="text" value="<?php echo $tab['nom']; ?>">
+                        <input type="text" value="<?php echo $tab['prenom']; ?>">
+                        <select>
+                            <option value="<?php echo $tab['admin']; ?>"><?php echo $tab['admin']; ?></option>
+                            <?php 
+                                if($tab['admin'] == 'Oui'){
+                                    ?><option value="Non">Non</option><?php
+                                }else{
+                                    ?><option value="Oui">Oui</option><?php
+                                }
+                            ?>
+                        </select>
+                        <button id="suppr">Supprimer</button>
+                        <button id="save">Enregistrer</button>
+                    </form>
+                <?php
+            }
         }
     }
 

@@ -64,16 +64,7 @@
 
                         <!-- Gestion Benenvole -->
                         <div id="gestionBenevole" class="gestion">
-                            <div class="btn-gestion">
-                                <button id="insert" class="insert">Ajouter</button>
-                                <button id="update" class="update">Modifier</button>
-                                <button id="suppr" class="delete">Supprimer</button>
-                                <button id="cancel" class="cancel">Annuler</button>
-                            </div>
                             <?php $user->selectUser(); ?>
-                            <div class="btn-gestion-confirm">
-                                <button id="confirm" class="confirm">Confirmer</button>
-                            </div>
                         </div>
 
                         <!-- Gestion Pharmacie -->
@@ -83,24 +74,15 @@
 
                         <!-- Gestion Base log -->
                         <div id="gestionBaseLog" class="gestion">
-                            <?php $inventaire->select('pharmacie'); ?>
+                            <?php $inventaire->select('base_log'); ?>
                         </div>
 
                         <!-- Gestion Vestiaire -->
                         <div id="gestionVestiaire" class="gestion">
-                            <?php $inventaire->select('pharmacie'); ?>
+                            <?php $inventaire->select('vestiaire'); ?>
                         </div>
                         <script type="text/javascript" src="src/js/parametre.js"></script>
                     </div>
-
-                    <script>
-
-                        ( async () => {
-                            console.log( await count( "user" ) );
-                        })();
-
-                     </script>
-
 
                 <?php
             }else{

@@ -13,7 +13,7 @@ function reduce (e) {
         ? "#CC0000" : "#000000";
     table.style.fontWeight = quantite.value < parseInt(quantite.parentNode.dataset.min)
         ? "bold" : "normal";*/
-    update( e.parentNode.id, quantite.value );
+    update(e.parentNode.id, quantite.value);
 }
 
 function add (e) {

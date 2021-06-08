@@ -82,40 +82,51 @@
         }
 
         public function commande($table){
-            $this->_req = "SELECT * FROM `$table` WHERE $table.quantite < $table.quantiteMin";
+            $this->_req = "SELECT COUNT(*) FROM `$table` WHERE $table.quantite < $table.quantiteMin";
             $Result = $this->_bdd->query($this->_req);
-            ?>
-                <table>
-                    <thead>
-                        <tr>
-                            <td>ID</td>
-                            <td>Nom</td>
-                            <td>Localisation</td>
-                            <td>Quantité</td>
-                            <td>Quantité Minimum</td>
-                            <td>Quantité Manquante</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-            <?php
-                while($tab = $Result->fetch()){
-                    $quantiteManquante = $tab['quantiteMin'] - $tab['quantite'];
-                    $link = strtolower($tab['localisation']);
-                    ?>
-                        <tr>
-                            <td><?php echo $tab['id']; ?></td>
-                            <td><?php echo $tab['nom']; ?></td>
-                            <td><a href="<?php echo $link; ?>.php"><?php echo $tab['localisation']; ?></a></td>
-                            <td><?php echo $tab['quantite']; ?></td>
-                            <td><?php echo $tab['quantiteMin']; ?></td>
-                            <td><?php echo $quantiteManquante ?></td>
-                        </tr>
-                    <?php
-                }
-            ?>
-                    </tbody>
-                </table>
-            <?php
+            if($tab = $Result->fetch()){
+                $count = $tab[0];
+            }
+            if($count > 0){
+                $this->_req = "SELECT * FROM `$table` WHERE $table.quantite < $table.quantiteMin";
+                $Result = $this->_bdd->query($this->_req);
+                ?>
+                    <table>
+                        <thead>
+                            <tr>
+                                <td>ID</td>
+                                <td>Nom</td>
+                                <td>Localisation</td>
+                                <td>Quantité</td>
+                                <td>Quantité Minimum</td>
+                                <td>Quantité Manquante</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                <?php
+                    while($tab = $Result->fetch()){
+                        $quantiteManquante = $tab['quantiteMin'] - $tab['quantite'];
+                        $link = strtolower($tab['localisation']);
+                        ?>
+                            <tr>
+                                <td><?php echo $tab['id']; ?></td>
+                                <td><?php echo $tab['nom']; ?></td>
+                                <td><a href="<?php echo $link; ?>.php"><?php echo $tab['localisation']; ?></a></td>
+                                <td><?php echo $tab['quantite']; ?></td>
+                                <td><?php echo $tab['quantiteMin']; ?></td>
+                                <td><?php echo $quantiteManquante ?></td>
+                            </tr>
+                        <?php
+                    }
+                ?>
+                        </tbody>
+                    </table>
+                <?php
+            }else{
+                ?>
+                    <div class="conforme">Inventaire Conforme</div>
+                <?php
+            }
         }
     }
 
