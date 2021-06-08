@@ -1,17 +1,12 @@
 <?php
 
-    if (session_status() == PHP_SESSION_NONE) {
-        session_start();
-    }
-
+    session_start();
     include('../../session.php');
 
-    $content = trim(file_get_contents("php://input"));
+    if( $_SESSION["Connected"] == true ) {
 
-    $data = json_decode($content, true);
+        $user->formUser( $_GET["user"] );
 
-    $_SESSION['nivol'] = $data[id];
-
-    echo 1;
+    }
 
 ?>
