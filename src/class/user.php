@@ -1,7 +1,7 @@
 <?php
 
     class user{
-        
+
         /* PRIVATE */
         private $_nivol;
         private $_login;
@@ -29,7 +29,7 @@
         public function setUserByNivol($nivol){
             $req = "SELECT * FROM `User` WHERE `nivol`='".$nivol."'";
             $Result = $this->_bdd->query($req);
-            if($tab = $Result->fetch()){ 
+            if($tab = $Result->fetch()){
                 $this->setUser($tab["nivol"], $tab["login"], $tab["mdp"], $tab["nom"], $tab["prenom"], $tab["admin"]);
             }
         }
@@ -79,7 +79,7 @@
                         <section class="container">
                             <div class="login">
                                 <h1>Accès sécurisé Croix-Rouge française</h1>
-                                <form method="post">    
+                                <form method="post">
                                     <img src="src/img/logo.png" class="logo" alt="Croix-Rouge française">
                                     <?php
                                         if($error == true){
@@ -139,20 +139,23 @@
                     </thead>
                     <tbody>
                         <?php while($tab = $Result->fetch()){ ?>
+
                             <tr id="<?php echo $tab['nivol']; ?>">
-                                <td onclick="tablelink(this)">
-                                    <div><?php echo $tab['nivol']; ?></div>
+                                <td>
+                                    <div><a href="./src/edit/benevole.php?user=<?= $tab['nivol']; ?>"><?php echo $tab['nivol']; ?></a></div>
                                 </td>
-                                <td onclick="tablelink(this)">
-                                    <div><?php echo $tab['nom']; ?></div>
+                                <td >
+                                    <div><a href="./src/edit/benevole.php?user=<?= $tab['nivol']; ?>"><?php echo $tab['nom']; ?></a></div>
                                 </td>
-                                <td onclick="tablelink(this)">
-                                    <div><?php echo $tab['prenom']; ?></div>
+                                <td >
+                                    <div><a href="./src/edit/benevole.php?user=<?= $tab['nivol']; ?>"><?php echo $tab['prenom']; ?></a></div>
                                 </td>
-                                <td onclick="tablelink(this)">
-                                    <div><?php echo $tab['admin']; ?></div>
+                                <td >
+                                    <div><a href="./src/edit/benevole.php?user=<?= $tab['nivol']; ?>"><?php echo $tab['admin']; ?></a></div>
                                 </td>
                             </tr>
+
+
                         <?php
                         }
                         ?>
@@ -162,9 +165,10 @@
         }
 
         public function formUser($nivol){
-            $this->_req = "SELECT `nivol`, `nom`, `prenom`, `admin` FROM `user` WHERE `nivol`= $nivol";
-            $Result = $this->_bdd->query($this->_req);
-            while($tab = $Result->fetch()){
+            $this->_req = "SELECT `nivol`, `nom`, `prenom`, `admin` FROM `user` WHERE `nivol` = '".$nivol."'";
+            $Result = $this->_bdd->query( $this->_req );
+
+            if ( $tab = $Result->fetch() ) {
                 ?>
                     <form method="post">
                         <input type="text" value="<?php echo $tab['nivol']; ?>">
@@ -172,7 +176,7 @@
                         <input type="text" value="<?php echo $tab['prenom']; ?>">
                         <select>
                             <option value="<?php echo $tab['admin']; ?>"><?php echo $tab['admin']; ?></option>
-                            <?php 
+                            <?php
                                 if($tab['admin'] == 'Oui'){
                                     ?><option value="Non">Non</option><?php
                                 }else{
@@ -184,7 +188,10 @@
                         <button id="save">Enregistrer</button>
                     </form>
                 <?php
+            } else {
+                echo "No user found";
             }
+
         }
     }
 
