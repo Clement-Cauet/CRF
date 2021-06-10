@@ -12,9 +12,8 @@
     // —— Transforms the character string into a JSON object
     $data = json_decode($content, true);
 
-    $req = "SELECT COUNT(1) FROM $data[table]";
-    $Result = $bdd->query($req)->fetch();
-
-    echo json_encode($Result);
+    $data[nom] = strtoupper($data[nom]);
+    $req = "UPDATE `user` SET `nivol`= '$data[nivol]',`login`= '$data[login]',`mdp`= '$data[mdp]',`nom`= '$data[nom]',`prenom`= '$data[prenom]',`admin`= '$data[admin]' WHERE `nivol` = '$data[id]'";
+    $Result = $bdd->query($req);
 
 ?>

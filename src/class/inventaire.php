@@ -64,9 +64,9 @@
                                             <div class="number-input" id="<?php echo $tab['id']; ?>" data-min="<?= $tab['quantiteMin'] ?>">
                                                 <button onclick="reduce(this)" class="decrement">-</button>
                                                 <?php if($tab['quantite'] < $tab['quantiteMin']) { ?>
-                                                    <input type="number" class="quantity" min="0" style="color: #CC0000" value="<?php echo $tab['quantite']; ?>">
+                                                    <input type="number" class="quantity" min="0" style="color: #CC0000" value="<?php echo $tab['quantite']; ?>" disabled>
                                                 <?php }else{ ?>
-                                                    <input type="number" class="quantity" min="0" value="<?php echo $tab['quantite']; ?>">
+                                                    <input type="number" class="quantity" min="0" value="<?php echo $tab['quantite']; ?>" disabled>
                                                 <?php } ?>
                                                 <button onclick="add(this)" class="increment">+</button>
                                             </div>

@@ -11,6 +11,7 @@
     $inventaire = new inventaire($bdd);
 
     $user = new user($bdd);
+    $benevole = new user($bdd);
 
     if (isset($_SESSION["Connected"]) && $_SESSION["Connected"] == true){
         if(isset($_SESSION["nivol"])){

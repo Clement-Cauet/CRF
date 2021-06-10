@@ -1,36 +1,36 @@
-<link rel='stylesheet' type='text/css' href='src/css/menu.css'>
+<link rel='stylesheet' type='text/css' href='../css/menu.css'>
 
 <header class="header">
     <nav class="navbar">
         <ul class="navbar-gauche">
             <li>
-                <a href="index.php">
-                    <img class="logo" src="src/img/croix-rouge.png" width="25" height="25">
+                <a href="../../index.php">
+                    <img class="logo" src="../img/croix-rouge.png" width="25" height="25">
                     <span class="titre">Inventaire</span>
                 </a>
             </li>
             <li>
-                <a href="pharmacie.php">
+                <a href="../../pharmacie.php">
                     <i class="fas fa-medkit"></i>
                 </a>
             </li>
             <li>
-                <a href="base_log.php">
+                <a href="../../base_log.php">
                     <i class="fas fa-ambulance"></i>
                 </a>
             </li>
             <li>
-                <a href="vestiaire.php">
+                <a href="../../vestiaire.php">
                     <i class="fas fa-tshirt"></i>
                 </a>
             </li>
             <li>
-                <a href="main_courante.php">
+                <a href="../../main_courante.php">
                     <i class="far fa-clock"></i>
                 </a>
             </li>
             <li>
-                <a href="commande.php">
+                <a href="../../commande.php">
                     <i class="far fa-clipboard"></i>
                 </a>
             </li>
@@ -39,7 +39,7 @@
                 if($admin == 'Oui'){
                     ?>
                         <li>
-                            <a href="parametre.php">
+                            <a href="../../parametre.php">
                                 <i class="fas fa-user-cog"></i>
                             </a>
                         </li>
@@ -78,7 +78,7 @@
         <ul class="navbar-gauche">
             <li>
                 <a href="index.php">
-                    <img class="logo" src="src/img/croix-rouge.png" width="25" height="25">
+                    <img class="logo" src="../img/croix-rouge.png" width="25" height="25">
                     <span class="titre">Inventaire</span>
                 </a>
             </li>
@@ -89,16 +89,16 @@
                     <i class="fas fa-bars"></i>
                 </button>
                 <div id="sidebar-menu" class="sidebar-menu">
-                    <li><a href="pharmacie.php">Pharmacie</a></li>
-                    <li><a href="base_log.php">Base Log</i></a></li>
-                    <li><a href="vestiaire.php">Vestiaire</i></a></li>
-                    <li><a href="main_courante.php">Main Courante</i></a></li>
-                    <li><a href="commande.php">Commande</i></a></li>
+                    <li><a href="../../pharmacie.php">Pharmacie</a></li>
+                    <li><a href="../../base_log.php">Base Log</i></a></li>
+                    <li><a href="../../vestiaire.php">Vestiaire</i></a></li>
+                    <li><a href="../../main_courante.php">Main Courante</i></a></li>
+                    <li><a href="../../commande.php">Commande</i></a></li>
                     <?php 
                         $admin = $user->getAdmin();
                         if($admin == 'Oui'){
                             ?>
-                                <li><a href="parametre.php">Paramètre</i></a></li>
+                                <li><a href="../../parametre.php">Parametre</i></a></li>
                             <?php
                         } 
                     ?>
@@ -108,4 +108,4 @@
     </nav>
 </header>
 
-<script type="text/javascript" src="src/js/menu.js"></script>
+<script type="text/javascript" src="../js/menu.js"></script>

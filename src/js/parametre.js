@@ -1,5 +1,9 @@
 /* Gestion Button */
 document.getElementById('retour').hidden = true;
+document.getElementById('cancel').hidden = true;
+for(var i=0; i<4; i++){
+    document.getElementsByClassName('insert')[i].hidden = true;
+}
 
 /* Gestion Div */
 document.getElementById('gestionBenevole').hidden = true;
@@ -7,58 +11,53 @@ document.getElementById('gestionPharmacie').hidden = true;
 document.getElementById('gestionBaseLog').hidden = true;
 document.getElementById('gestionVestiaire').hidden = true;
 
+/* Gestion Form */
+document.getElementById('formBenevole').hidden = true;
+
 /* Show Elements */
 var benevole = document.getElementById('benevole');
 benevole.addEventListener('click', function(){
-    document.getElementById('benevole').hidden = true;
-    document.getElementById('pharmacie').hidden = true;
-    document.getElementById('baseLog').hidden = true;
-    document.getElementById('vestiaire').hidden = true;
+    document.getElementById('menu').hidden = true;
     document.getElementById('retour').hidden = false;
+    document.getElementById('insertBenevole').hidden = false;
 
     document.getElementById('gestionBenevole').hidden = false;
 });
 
 var pharmacie = document.getElementById('pharmacie');
 pharmacie.addEventListener('click', function(){
-    document.getElementById('benevole').hidden = true;
-    document.getElementById('pharmacie').hidden = true;
-    document.getElementById('baseLog').hidden = true;
-    document.getElementById('vestiaire').hidden = true;
+    document.getElementById('menu').hidden = true;
     document.getElementById('retour').hidden = false;
+    document.getElementById('insertBenevole').hidden = false;
 
     document.getElementById('gestionPharmacie').hidden = false;
 });
 
 var baseLog = document.getElementById('baseLog');
 baseLog.addEventListener('click', function(){
-    document.getElementById('benevole').hidden = true;
-    document.getElementById('pharmacie').hidden = true;
-    document.getElementById('baseLog').hidden = true;
-    document.getElementById('vestiaire').hidden = true;
+    document.getElementById('menu').hidden = true;
     document.getElementById('retour').hidden = false;
+    document.getElementById('insertBenevole').hidden = false;
 
     document.getElementById('gestionBaseLog').hidden = false;
 });
 
 var vestiaire = document.getElementById('vestiaire');
 vestiaire.addEventListener('click', function(){
-    document.getElementById('benevole').hidden = true;
-    document.getElementById('pharmacie').hidden = true;
-    document.getElementById('baseLog').hidden = true;
-    document.getElementById('vestiaire').hidden = true;
+    document.getElementById('menu').hidden = true;
     document.getElementById('retour').hidden = false;
+    document.getElementById('insertBenevole').hidden = false;
 
     document.getElementById('gestionVestiaire').hidden = false;
 });
 
 var retour = document.getElementById('retour');
 retour.addEventListener('click', function(){
-    document.getElementById('benevole').hidden = false;
-    document.getElementById('pharmacie').hidden = false;
-    document.getElementById('baseLog').hidden = false;
-    document.getElementById('vestiaire').hidden = false;
+    document.getElementById('menu').hidden = false;
     document.getElementById('retour').hidden = true;
+    for(var i=0; i<4; i++){
+        document.getElementsByClassName('insert')[i].hidden = true;
+    }
 
     document.getElementById('gestionBenevole').hidden = true;
     document.getElementById('gestionPharmacie').hidden = true;
@@ -66,22 +65,19 @@ retour.addEventListener('click', function(){
     document.getElementById('gestionVestiaire').hidden = true;
 });
 
-function tablelink(e){
-    e.parentNode.querySelector('div');
-    form(e.parentNode.id);
-}
+/* Insert Elements */
+var insertBenevole = document.getElementById('insertBenevole');
+insertBenevole.addEventListener('click', function(){
+    document.getElementById('cancel').hidden = false;
 
-function form(id) {
-    fetch("./src/edit/benevole.php", {
-        method: "post",
-        body: JSON.stringify({
-            id : id
-        }).then((res) => { 
-            return res.json() 
-        }
-        ).then((data) => { 
-            console.log(data) 
-        })
-    });
+    document.getElementById('insertBenevole').hidden = true;
+    document.getElementById('formBenevole').hidden = false;
+});
 
-}
+var cancel = document.getElementById('cancel');
+cancel.addEventListener('click', function(){
+    document.getElementById('cancel').hidden = true;
+    
+    document.getElementById('insertBenevole').hidden = false;
+    document.getElementById('formBenevole').hidden = true;
+});

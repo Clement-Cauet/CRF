@@ -1,0 +1,12 @@
+.conforme {
+    font-weight: bold;
+    text-align: center;
+}
+
+tbody td {
+    height: 30px;
+    width: 13%;
+    line-height: center;
+    text-align: center;
+    text-decoration: none;
+}
