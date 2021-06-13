@@ -25,7 +25,8 @@
                         <?php $benevole->formUser($_GET["user"]); ?>
                     </div>
                     <?php 
-                        //$benevole->updateUser($_GET["user"]); 
+                        $benevole->updateUser($_GET["user"]);
+                        $benevole->deleteUser($_GET["user"]);
                     ?>
                     <script type="text/javascript" src="../js/benevole.js"></script>
                 </div>

@@ -217,7 +217,7 @@ nav .navbar-droite > li > a {
 }
 
 .sidebar-menu {
-    position: absolute;
+    display: none;
     background-color: #f9f9f9;
     width: 170px;
     right: -200px;
@@ -230,6 +230,7 @@ nav .navbar-droite > li > a {
 }
 
 .add-sidebar-menu {
+    display: block;
     transform: translateX(-200px);
     transition: transform 0.3s;
 }

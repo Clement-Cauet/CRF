@@ -25,3 +25,19 @@ function update (nivol, login, mdp, nom, prenom, admin, id) {
         })
     });
 }
+
+/*var suppr = document.getElementById('suppr');
+suppr.addEventListener('click', function(){
+    var id = document.getElementById('id').value;
+
+    del(id);
+});
+
+function del (id) {
+    fetch("../api/deleteUser.php", {
+        method: "post",
+        body: JSON.stringify({
+            id : id
+        })
+    });
+}*/

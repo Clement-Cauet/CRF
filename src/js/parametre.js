@@ -55,6 +55,7 @@ var retour = document.getElementById('retour');
 retour.addEventListener('click', function(){
     document.getElementById('menu').hidden = false;
     document.getElementById('retour').hidden = true;
+    document.getElementById('cancel').hidden = true;
     for(var i=0; i<4; i++){
         document.getElementsByClassName('insert')[i].hidden = true;
     }
@@ -63,6 +64,8 @@ retour.addEventListener('click', function(){
     document.getElementById('gestionPharmacie').hidden = true;
     document.getElementById('gestionBaseLog').hidden = true;
     document.getElementById('gestionVestiaire').hidden = true;
+    document.getElementById('insertBenevole').hidden = true;
+    document.getElementById('formBenevole').hidden = true;
 });
 
 /* Insert Elements */

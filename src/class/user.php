@@ -29,7 +29,7 @@
         public function setUserByNivol($nivol){
             $req = "SELECT * FROM `User` WHERE `nivol`='".$nivol."'";
             $Result = $this->_bdd->query($req);
-            if($tab = $Result->fetch()){
+            while($tab = $Result->fetch()){
                 $this->setUser($tab["nivol"], $tab["login"], $tab["mdp"], $tab["nom"], $tab["prenom"], $tab["admin"]);
             }
         }
@@ -207,6 +207,13 @@
                 $nivol = $_POST['nivol']; $login = $_POST['login']; $mdp = $_POST['mdp']; $nom = $_POST['nom']; $prenom = $_POST['prenom']; $admin = $_POST['admin'];
                 $nom = strtoupper($nom);
                 $this->_req = "UPDATE `user` SET `nivol`= '$nivol',`login`= '$login',`mdp`= '$mdp',`nom`= '$nom',`prenom`= '$prenom',`admin`= '$admin' WHERE `nivol` = '".$id."'";
+                $Result = $this->_bdd->query( $this->_req );
+            }
+        }
+
+        public function deleteUser($id){
+            if(isset($_POST['suppr'])){
+                $this->_req = "DELETE FROM `user` WHERE `nivol` = '".$id."'";
                 $Result = $this->_bdd->query( $this->_req );
             }
         }

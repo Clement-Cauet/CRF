@@ -8,6 +8,10 @@
     $mdp = "";
     $bdd = new PDO('mysql:host=localhost; dbname=crf; charset=utf8', $login, $mdp);
 
+    /*$login = "237972";
+    $mdp = "dofusclem";
+    $bdd = new PDO('mysql:host=mysql-cauet-clement.alwaysdata.net; dbname=cauet-clement_crf; charset=utf8', $login, $mdp);*/
+
     $inventaire = new inventaire($bdd);
 
     $user = new user($bdd);
