@@ -34,7 +34,7 @@
                     <i class="far fa-clipboard"></i>
                 </a>
             </li>
-            <?php 
+            <?php
                 $admin = $user->getAdmin();
                 if($admin == 'Oui'){
                     ?>
@@ -44,7 +44,7 @@
                             </a>
                         </li>
                     <?php
-                } 
+                }
             ?>
         </ul>
         <ul class="navbar-droite">
@@ -88,24 +88,24 @@
                 <button id="menu-collapse" class="menu-collapse">
                     <i class="fas fa-bars"></i>
                 </button>
-                <div id="sidebar-menu" class="sidebar-menu">
-                    <li><a href="pharmacie.php">Pharmacie</a></li>
-                    <li><a href="base_log.php">Base Log</i></a></li>
-                    <li><a href="vestiaire.php">Vestiaire</i></a></li>
-                    <li><a href="main_courante.php">Main Courante</i></a></li>
-                    <li><a href="commande.php">Commande</i></a></li>
-                    <?php 
-                        $admin = $user->getAdmin();
-                        if($admin == 'Oui'){
-                            ?>
-                                <li><a href="parametre.php">Paramètre</i></a></li>
-                            <?php
-                        } 
-                    ?>
-                </div>
             </div>
         </ul>
     </nav>
+    <nav id="sidebar-menu" class="sidebar-menu">
+        <li><a href="pharmacie.php">Pharmacie</a></li>
+        <li><a href="base_log.php">Base Log</i></a></li>
+        <li><a href="vestiaire.php">Vestiaire</i></a></li>
+        <li><a href="main_courante.php">Main Courante</i></a></li>
+        <li><a href="commande.php">Commande</i></a></li>
+        <?php
+            $admin = $user->getAdmin();
+            if($admin == 'Oui'){
+                ?>
+                    <li><a href="parametre.php">Paramètre</i></a></li>
+                <?php
+            }
+        ?>
+    </div>
 </header>
 
 <script type="text/javascript" src="src/js/menu.js"></script>
