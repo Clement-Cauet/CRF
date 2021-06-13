@@ -37,16 +37,11 @@ window.onclick = function(event) {
 }*/
 var sidebarOpened = false;
 var menu = document.getElementById("menu-collapse");
-menu.addEventListener('click', function(e){
-    e.stopPropagation();
-    e.preventDefault();
-    document.body.classList.add('add-sidebar-menu');
-    document.body.classList.remove('remove-sidebar-menu');
-    sidebarOpened = true;
-});
-document.body.addEventListener('click', function(){
-    if(sidebarOpened){
-        document.body.classList.add('remove-sidebar-menu');
-        document.body.classList.remove('add-sidebar-menu');
-    }
-});
+var sideMenu = document.getElementById("sidebar-menu");
+
+menu.addEventListener('click', ( e ) => {
+
+    sideMenu.classList.toggle( "open" );
+
+})
+
