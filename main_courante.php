@@ -12,6 +12,7 @@
         <title>Main courante - Inventaire - Croix-Rouge française</title>
         <link rel="icon" type="image/png" href="src/img/croix-rouge.png">
         <link rel='stylesheet' type='text/css' href='src/css/index.css'>
+        <link rel='stylesheet' type='text/css' href='src/css/main_courante.css'>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
     </head>
     <body>
@@ -19,7 +20,10 @@
             include("menu.php");
         ?>
         <div class="back">
-
+            <?php 
+                $message->insertMessage();
+                $message->selectMessage(); 
+            ?>
         </div>
     </body> 
 <?php

@@ -18,10 +18,6 @@
     margin-right: auto;
 }
 
-label {
-    font-weight: bold;
-}
-
 .form-input {
     margin: 5px;
     padding: 0 10px;
@@ -40,7 +36,7 @@ label {
     height: 35px;
 }
 
-#save, #suppr {
+#save, #suppr, #suppr_confirm, #cancel {
     position: relative;
     width: 80px;
     height: 30px;
@@ -56,9 +52,18 @@ label {
     background-color:#000099;
 }
 
-#suppr {
+#suppr, #suppr_confirm {
     color: white;
     background-color: #CC0000;
+}
+
+#suppr_confirm {
+    width: 180px;
+}
+
+#cancel {
+    color: #CC0000;
+    background-color: white;
 }
 
 @media screen and (max-width: 1350px) {

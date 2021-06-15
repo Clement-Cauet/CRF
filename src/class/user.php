@@ -17,7 +17,7 @@
             $this->_bdd = $bdd;
         }
 
-        public function setUser($nivol ,$login, $mdp, $nom, $prenom, $admin){
+        public function setUser($nivol, $login, $mdp, $nom, $prenom, $admin){
             $this->_nivol = $nivol;
             $this->_login = $login;
             $this->_mdp = $mdp;
@@ -27,7 +27,7 @@
         }
 
         public function setUserByNivol($nivol){
-            $req = "SELECT * FROM `User` WHERE `nivol`='".$nivol."'";
+            $req = "SELECT * FROM `user` WHERE `nivol`='".$nivol."'";
             $Result = $this->_bdd->query($req);
             while($tab = $Result->fetch()){
                 $this->setUser($tab["nivol"], $tab["login"], $tab["mdp"], $tab["nom"], $tab["prenom"], $tab["admin"]);
@@ -50,18 +50,19 @@
             return $this->_admin;
         }
 
-        public function connexion(){
+        public function connexion($message){
             $afficheForm = true;
             $error = false;
             $_SESSION["Connected"] = false;
             if(isset($_POST["login"]) && isset($_POST["mdp"])){
-                $req = "SELECT * FROM `user` WHERE `login`='".$_POST['login']."' AND `mdp` = '".$_POST['mdp']."'";
-                $Result = $this->_bdd->query($req);
+                $this->_req = "SELECT * FROM `user` WHERE `login`='".$_POST['login']."' AND `mdp` = '".$_POST['mdp']."'";
+                $Result = $this->_bdd->query($this->_req);
                 if($tab = $Result->fetch()){
                     $this->setUserByNivol($tab["nivol"]);
                     $_SESSION["nivol"] = $tab["nivol"];
                     $_SESSION["Connected"] = true;
                     $afficheForm = false;
+                    $message->loginMessage($this->_nivol);
                 }else{
                     $afficheForm = true;
                     $error = true;
@@ -172,18 +173,24 @@
             ?>
                 <form method="post">
                     <div class="nivol">
-                        <input type="text" id="nivol" name="nivol" class="form-input" placeholder="Nivol" require>
+                        <label>Nivol</label>
+                        <input type="text" id="nivol" name="nivol" class="form-input" placeholder="Nivol" required>
                     </div>
                     <div class="account">
-                        <input type="text" id="login" name="login" class="form-input" placeholder="Login" require>
-                        <input type="text" id="mdp" name="mdp" class="form-input" placeholder="Mot de passe" require>
+                        <label>Login</label>
+                        <input type="text" id="login" name="login" class="form-input" placeholder="Login" required>
+                        <label>Mot de passe</label>
+                        <input type="text" id="mdp" name="mdp" class="form-input" placeholder="Mot de passe" required>
                     </div>
                     <div class="name">
-                        <input type="text" id="nom" name="nom" class="form-input" placeholder="Nom" require>
-                        <input type="text" id="prenom" name="prenom" class="form-input" placeholder="Prénom" require>
+                        <label>Nom</label>
+                        <input type="text" id="nom" name="nom" class="form-input" placeholder="Nom" required>
+                        <label>Prénom</label>
+                        <input type="text" id="prenom" name="prenom" class="form-input" placeholder="Prénom" required>
                     </div>
                     <div class="admin">
-                        <select name="admin" class="form-input" require>
+                        <label>Administrateur</label>
+                        <select name="admin" class="form-input" required>
                             <option value=""></option>
                             <option value="Oui">Oui</option>
                             <option value="Non">Non</option>
@@ -199,23 +206,22 @@
                 $nom = strtoupper($nom);
                 $this->_req = "INSERT INTO `user`(`nivol`, `login`, `mdp`, `nom`, `prenom`, `admin`) VALUES('$nivol', '$login', '$mdp', '$nom', '$prenom', '$admin')";
                 $Result = $this->_bdd->query($this->_req);
+                unset($_POST);
             }
         }
 
         public function updateUser($id){
-            if(isset($_POST['save'])){
-                $nivol = $_POST['nivol']; $login = $_POST['login']; $mdp = $_POST['mdp']; $nom = $_POST['nom']; $prenom = $_POST['prenom']; $admin = $_POST['admin'];
-                $nom = strtoupper($nom);
-                $this->_req = "UPDATE `user` SET `nivol`= '$nivol',`login`= '$login',`mdp`= '$mdp',`nom`= '$nom',`prenom`= '$prenom',`admin`= '$admin' WHERE `nivol` = '".$id."'";
-                $Result = $this->_bdd->query( $this->_req );
-            }
+            $nivol = $_POST['nivol']; $login = $_POST['login']; $mdp = $_POST['mdp']; $nom = $_POST['nom']; $prenom = $_POST['prenom']; $admin = $_POST['admin'];
+            $nom = strtoupper($nom);
+            $this->_req = "UPDATE `user` SET `nivol`= '$nivol',`login`= '$login',`mdp`= '$mdp',`nom`= '$nom',`prenom`= '$prenom',`admin`= '$admin' WHERE `nivol` = '".$id."'";
+            $Result = $this->_bdd->query( $this->_req );
+            unset($_POST);
         }
 
         public function deleteUser($id){
-            if(isset($_POST['suppr'])){
-                $this->_req = "DELETE FROM `user` WHERE `nivol` = '".$id."'";
-                $Result = $this->_bdd->query( $this->_req );
-            }
+            $this->_req = "DELETE FROM `user` WHERE `nivol` = '".$id."'";
+            $Result = $this->_bdd->query( $this->_req );
+            unset($_POST);
         }
 
         public function formUser($id){
@@ -228,23 +234,23 @@
                         <div class="nivol">
                             <label>Nivol</label>
                             <input type="text" id="id" value="<?php echo $tab['nivol']; ?>" hidden>
-                            <input type="text" class="form-input" id="nivol" name="nivol" value="<?php echo $tab['nivol']; ?>" require>
+                            <input type="text" class="form-input" id="nivol" name="nivol" value="<?php echo $tab['nivol']; ?>" required>
                         </div>
                         <div class="account">
                             <label>Login</label>
-                            <input type="text" class="form-input" id="login" name="login" value="<?php echo $tab['login']; ?>" require>
+                            <input type="text" class="form-input" id="login" name="login" value="<?php echo $tab['login']; ?>" required>
                             <label>Mot de passe</label>
-                            <input type="text" class="form-input" id="mdp" name="mdp" value="<?php echo $tab['mdp']; ?>" require>
+                            <input type="text" class="form-input" id="mdp" name="mdp" value="<?php echo $tab['mdp']; ?>" required>
                         </div>
                         <div class="name">
                             <label>Nom</label>
-                            <input type="text" class="form-input" id="nom" name="nom" value="<?php echo $tab['nom']; ?>" require>
+                            <input type="text" class="form-input" id="nom" name="nom" value="<?php echo $tab['nom']; ?>" required>
                             <label>Prénom</label>
-                            <input type="text" class="form-input" id="prenom" name="prenom" value="<?php echo $tab['prenom']; ?>" require>
+                            <input type="text" class="form-input" id="prenom" name="prenom" value="<?php echo $tab['prenom']; ?>" required>
                         </div>
                         <div class="admin">
                             <label>Administrateur</label>
-                            <select class="form-input" id="admin" name="admin" require>
+                            <select class="form-input" id="admin" name="admin" required>
                                 <option value="<?php echo $tab['admin']; ?>"><?php echo $tab['admin']; ?></option>
                                 <?php
                                     if($tab['admin'] == 'Oui'){
@@ -256,9 +262,12 @@
                             </select>
                         </div>
                         <div class="button">
-                            <button id="save" name="save">Enregistrer</button>
-                            <button id="suppr" name="suppr">Supprimer</button>
+                            <input type="submit" id="save" name="save" value="Enregistrer">
+                            <input type="submit" id="suppr_confirm" name="suppr_confirm" value="Supprimer définitivement">
+                            <input type="button" id="suppr" name="suppr" value="Supprimer">
+                            <input type="button" id="cancel" name="cancel" value="Annuler">
                         </div>
+                        </form>
                     </form>
                 <?php
             } else {

@@ -255,6 +255,10 @@ nav .navbar-droite>li>a {
     text-decoration: none;
 }
 
+.sidebar-menu a:hover {
+    color: #CC0000;
+}
+
 @media screen and (max-width: 800px) {
     .navbar {
         visibility: collapse;

@@ -96,7 +96,6 @@
                             <tr>
                                 <td>ID</td>
                                 <td>Nom</td>
-                                <td>Localisation</td>
                                 <td>Quantité</td>
                                 <td>Quantité Minimum</td>
                                 <td>Quantité Manquante</td>
@@ -106,17 +105,27 @@
                 <?php
                     while($tab = $Result->fetch()){
                         $quantiteManquante = $tab['quantiteMin'] - $tab['quantite'];
-                        $link = strtolower($tab['localisation']);
-                        ?>
+                        if($table == 'pharmacie' || $table == 'base_log' || $table == 'vestiaire'){
+                            ?>
+                                <tr>
+                                    <td><a href="<?php echo $table; ?>.php"><?php echo $tab['id']; ?></a></td>
+                                    <td><a href="<?php echo $table; ?>.php"><?php echo $tab['nom']; ?></a></td>
+                                    <td><a href="<?php echo $table; ?>.php"><?php echo $tab['quantite']; ?></a></td>
+                                    <td><a href="<?php echo $table; ?>.php"><?php echo $tab['quantiteMin']; ?></a></td>
+                                    <td><a href="<?php echo $table; ?>.php"><?php echo $quantiteManquante ?></a></td>
+                                </tr>
+                            <?php
+                        }else{
+                            ?>
                             <tr>
-                                <td><?php echo $tab['id']; ?></td>
-                                <td><?php echo $tab['nom']; ?></td>
-                                <td><a href="<?php echo $link; ?>.php"><?php echo $tab['localisation']; ?></a></td>
-                                <td><?php echo $tab['quantite']; ?></td>
-                                <td><?php echo $tab['quantiteMin']; ?></td>
-                                <td><?php echo $quantiteManquante ?></td>
+                                <td><a href="src/<?php echo $table; ?>.php"><?php echo $tab['id']; ?></a></td>
+                                <td><a href="src/<?php echo $table; ?>.php"><?php echo $tab['nom']; ?></a></td>
+                                <td><a href="src/<?php echo $table; ?>.php"><?php echo $tab['quantite']; ?></a></td>
+                                <td><a href="src/<?php echo $table; ?>.php"><?php echo $tab['quantiteMin']; ?></a></td>
+                                <td><a href="src/<?php echo $table; ?>.php"><?php echo $quantiteManquante ?></a></td>
                             </tr>
                         <?php
+                        }
                     }
                 ?>
                         </tbody>

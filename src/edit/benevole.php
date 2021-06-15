@@ -4,6 +4,15 @@
     include('../../session.php');
     $benevole->setUserByNivol($_GET["user"]);
 
+    if(isset($_POST['save'])){
+        $benevole->updateUser($_GET["user"]);
+        header("Refresh:0");
+    }
+    if(isset($_POST['suppr_confirm'])){
+        $benevole->deleteUser($_GET["user"]);
+        header('location: ../../parametre.php');
+    }
+
     if( $_SESSION["Connected"] == true ) {
         ?>
             <head>
@@ -24,10 +33,6 @@
                     <div class="form-benevole">
                         <?php $benevole->formUser($_GET["user"]); ?>
                     </div>
-                    <?php 
-                        $benevole->updateUser($_GET["user"]);
-                        $benevole->deleteUser($_GET["user"]);
-                    ?>
                     <script type="text/javascript" src="../js/benevole.js"></script>
                 </div>
             </body>
