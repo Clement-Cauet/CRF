@@ -62,7 +62,7 @@
                     $_SESSION["nivol"] = $tab["nivol"];
                     $_SESSION["Connected"] = true;
                     $afficheForm = false;
-                    $message->loginMessage($this->_nivol);
+                    $message->loginMessage($this);
                 }else{
                     $afficheForm = true;
                     $error = true;

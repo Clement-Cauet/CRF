@@ -223,18 +223,17 @@ nav .navbar-droite>li>a {
 
 .sidebar-menu {
     /*! display: none; */
-    background-color: #f9f9f9;
+    position: absolute;
     width: 100vw;
-    right: -200px;
+    height: 100vh;
+    right: -150%;
     margin-top: 0;
     border: 1px solid;
     border-color: #e7e7e7;
+    background-color: #f9f9f9;
     text-align: center;
     transform: translateX(0);
     transition: transform 0.3s;
-    height: 100vh;
-    right: -100%;
-    position: absolute;
     transition: right .7s;
 }
 

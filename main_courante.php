@@ -21,7 +21,7 @@
         ?>
         <div class="back">
             <?php 
-                $message->insertMessage();
+                $message->insertMessage($user);
                 $message->selectMessage(); 
             ?>
         </div>
