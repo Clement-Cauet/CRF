@@ -12,6 +12,7 @@
             <title>Accueil - Inventaire - Croix-Rouge française</title>
             <link rel="icon" type="image/png" href="src/img/croix-rouge.png">
             <link rel='stylesheet' type='text/css' href='src/css/index.css'>
+            <link rel='stylesheet' type='text/css' href='src/css/accueil.css'>
             <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
         </head>
         <body>
@@ -20,6 +21,12 @@
             ?>
             <div class="back">
                 <h2>Accueil</h2>
+                <div class="news-block">
+                    <h3>Actualité</h3>
+                    <?php
+                        $message->insertNews();
+                    ?>
+                </div>
             </div>
         </body> 
     <?php

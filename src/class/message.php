@@ -84,6 +84,11 @@
             <?php
         }
 
+        public function insertNews(){
+            ?>
+            <?php
+        }
+
     }
 
 ?>
