@@ -22,8 +22,9 @@
         <div class="back">
             <?php 
                 $message->insertMessage($user);
-                $message->selectMessage(); 
+                $message->selectMessage($message, $user); 
             ?>
+            <script type="text/javascript" src="src/js/message.js"></script>
         </div>
     </body> 
 <?php

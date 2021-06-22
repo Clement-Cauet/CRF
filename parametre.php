@@ -55,6 +55,22 @@
                                     </div>
                                     <p>Gestion du Vestiaire</p>
                                 </button>
+
+                                <!-- Button Gestion Main Courante -->
+                                <button id="mainCourante" class="menu-button">
+                                    <div class="img-gestion">
+                                        <i class="far fa-clock"></i>
+                                    </div>
+                                    <p>Gestion de la Main Courante</p>
+                                </button>
+
+                                <!-- Button Gestion Actualité -->
+                                <button id="actualite" class="menu-button">
+                                    <div class="img-gestion">
+                                        <i class="far fa-newspaper"></i>
+                                    </div>
+                                    <p>Gestion des Actualités</p>
+                                </button>
                             </div>
                             <div id="menu-gestion" class="menu-gestion">
                                 <!-- Button Return -->
@@ -104,6 +120,16 @@
                             <!-- Gestion Vestiaire -->
                             <div id="gestionVestiaire" class="gestion">
                                 <?php $inventaire->select('vestiaire'); ?>
+                            </div>
+
+                            <!-- Gestion Main Courante -->
+                            <div id="gestionMainCourante" class="gestion">
+                                <?php //$message->selectMessage(); ?>
+                            </div>
+
+                            <!-- Gestion Actualité -->
+                            <div id="gestionActualite" class="gestion">
+                                <?php //$message->selectMessage(); ?>
                             </div>
                             <script type="text/javascript" src="src/js/parametre.js"></script>
                         </div>

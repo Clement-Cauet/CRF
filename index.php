@@ -24,9 +24,10 @@
                 <div class="news-block">
                     <h3>Actualité</h3>
                     <?php
-                        $message->insertNews();
+                        $message->selectNews();
                     ?>
                 </div>
+                <script type="text/javascript" src="src/js/accueil.js"></script>
             </div>
         </body> 
     <?php

@@ -10,6 +10,8 @@ document.getElementById('gestionBenevole').hidden = true;
 document.getElementById('gestionPharmacie').hidden = true;
 document.getElementById('gestionBaseLog').hidden = true;
 document.getElementById('gestionVestiaire').hidden = true;
+document.getElementById('gestionMainCourante').hidden = true;
+document.getElementById('gestionActualite').hidden = true;
 
 /* Gestion Form */
 document.getElementById('formBenevole').hidden = true;
@@ -49,6 +51,22 @@ vestiaire.addEventListener('click', function(){
     document.getElementById('insertBenevole').hidden = false;
 
     document.getElementById('gestionVestiaire').hidden = false;
+});
+
+var mainCourante = document.getElementById('mainCourante');
+mainCourante.addEventListener('click', function(){
+    document.getElementById('menu').hidden = true;
+    document.getElementById('retour').hidden = false;
+
+    document.getElementById('gestionMainCourante').hidden = false;
+});
+
+var actualite = document.getElementById('actualite');
+actualite.addEventListener('click', function(){
+    document.getElementById('menu').hidden = true;
+    document.getElementById('retour').hidden = false;
+
+    document.getElementById('gestionActualite').hidden = false;
 });
 
 var retour = document.getElementById('retour');

@@ -53,6 +53,81 @@ h3 {
     font-size: 15px;
 }
 
+.updateMessage {
+    display: none;
+    width: 90%;
+    height: 34px;
+    color: #404040;
+    background: white;
+    margin-bottom: 1rem;
+    margin-left: 2em;
+    border: 1px solid;
+    border-color: #e7e7e7;
+    border-radius: 2px;
+}
+
+.updateSubmit {
+    display: none;
+    color: white;
+    background-color:#000099;
+    width: 80px;
+    height: 30px;
+    border: 1px solid;
+    border-radius: 3px;
+}
+
+.show-update {
+    display: inline-block;
+}
+
+.button-message {
+    float: right;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 16px;
+    background-color: #d4e8f1;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.button-message:hover {
+    background-color: #cce0e9;
+}
+
+.option-message {
+    display: none;
+    position: absolute;
+    width: 100px;
+    right: 0;
+    padding: 10px;
+    margin-top: 4px;
+    background-color: #f9f9f9;
+    border: 1px solid;
+    border-color: #e7e7e7;
+    border-radius: 0 0 5px 5px;
+    z-index: 1000;
+}
+
+.show-option {
+    display: block;
+}
+
+.option-message input {
+    color: black;
+    height: 30px;
+    width: 100px;
+    margin: 0;
+    background-color: #f9f9f9;
+    border: none;
+    border-radius: 5px;
+}
+
+.option-message input:hover {
+    background-color: #e7e7e7;
+    cursor: pointer;
+}
+
 p {
     margin-top: 0;
     margin-bottom: 1rem;

@@ -13,3 +13,73 @@
 h3 {
     margin: 0;
 }
+
+.news {
+    position: relative;
+    width: 90%;
+    padding: 10px;
+    margin-top: 3%;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #ffffff;
+    border: 1px solid;
+    border-color: #e7e7e7;
+    border-radius: 5px;
+}
+
+.title {
+    text-align: center;
+}
+
+.show-more {
+    text-align: right;
+}
+
+.show-more button {
+    border: none;
+    background-color: white;
+    cursor: pointer;
+}
+
+.urgence{
+    color: white;
+    background-color: #cc0000;
+    border-radius: 5px;
+}
+
+.annonce{
+    color: black;
+    background-color: #feff18;
+    border-radius: 5px;
+}
+
+.maj{
+    color: white;
+    background-color:#000099;
+    border-radius: 5px;
+}
+
+.paragraph {
+    display: none;
+    position: relative;
+    width: 90%;
+    padding: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid;
+    border-color: #e7e7e7;
+    border-radius: 5px;
+}
+
+.editor {
+    display: none;
+    text-align: right;
+}
+
+.show-news {
+    display: block;
+}
+
+.rotate-button {
+    transform: rotate(180deg);
+}

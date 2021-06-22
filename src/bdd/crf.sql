@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mar. 15 juin 2021 à 18:46
+-- Généré le : mar. 22 juin 2021 à 15:24
 -- Version du serveur :  5.7.31
 -- Version de PHP : 7.3.21
 
@@ -20,6 +20,34 @@ SET time_zone = "+00:00";
 --
 -- Base de données : `crf`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `actualite`
+--
+
+DROP TABLE IF EXISTS `actualite`;
+CREATE TABLE IF NOT EXISTS `actualite` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `titre` text NOT NULL,
+  `message` text NOT NULL,
+  `date` datetime NOT NULL,
+  `type` varchar(20) NOT NULL,
+  `nivolUser` varchar(20) NOT NULL,
+  `nomUser` varchar(20) NOT NULL,
+  `prenomUser` varchar(20) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `actualite`
+--
+
+INSERT INTO `actualite` (`id`, `titre`, `message`, `date`, `type`, `nivolUser`, `nomUser`, `prenomUser`) VALUES
+(1, 'Article d\'urgence', 'Ceci est un article de test', '2021-06-22 14:45:14', 'urgence', '1100003175P', 'CAUET', 'Clement'),
+(3, 'Article d\'annonce', 'Ceci est un message annonce', '2021-06-22 17:01:27', 'annonce', '1100003175P', 'CAUET', 'Clement'),
+(4, 'Article de maj', 'Ceci est un message de maj', '2021-06-22 17:01:29', 'maj', '1100003175P', 'CAUET', 'Clement');
 
 -- --------------------------------------------------------
 
@@ -54,21 +82,28 @@ INSERT INTO `base_log` (`id`, `nom`, `quantite`, `quantiteMin`) VALUES
 DROP TABLE IF EXISTS `main_courante`;
 CREATE TABLE IF NOT EXISTS `main_courante` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `idUser` varchar(20) NOT NULL,
   `message` text NOT NULL,
   `date` datetime NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `idUser` (`idUser`),
-  KEY `idUser_2` (`idUser`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+  `report` tinyint(1) NOT NULL DEFAULT '0',
+  `nivolUser` varchar(20) NOT NULL,
+  `nomUser` varchar(20) NOT NULL,
+  `prenomUser` varchar(20) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `main_courante`
 --
 
-INSERT INTO `main_courante` (`id`, `idUser`, `message`, `date`) VALUES
-(1, '1100003175P', 'Se connecte sur l\'opération', '2021-06-15 00:00:00'),
-(2, '1100003175P', 'Se connecte sur l\'opération', '2021-06-15 17:15:14');
+INSERT INTO `main_courante` (`id`, `message`, `date`, `report`, `nivolUser`, `nomUser`, `prenomUser`) VALUES
+(1, 'Se connecte sur l\'opération', '2021-06-15 00:00:00', 0, '1100003175P', 'CAUET', 'Clement'),
+(2, 'Se connecte sur l\'opération', '2021-06-15 17:15:14', 0, '1100003175P', 'CAUET', 'Clement'),
+(3, 'Se connecte sur l\'opération', '2021-06-16 10:12:37', 0, '1100003175P', 'CAUET', 'Clement'),
+(4, 'Se connecte sur l\'opération', '2021-06-16 10:49:04', 0, '1100003175P', 'CAUET', 'Clement'),
+(5, 'Ceci est un message pour vérifié que l\'application fonctionne, double cliquez pour modifier le contenu.', '2021-06-16 11:09:01', 0, '1100003175P', 'CAUET', 'Clement'),
+(10, 'Se connecte sur l\'opération', '2021-06-16 13:51:13', 0, '123', 'JEAN', 'Michel'),
+(11, 'Vérification avec un autre compte', '2021-06-16 13:51:51', 1, '123', 'JEAN', 'Michel'),
+(12, 'Se connecte sur l\'opération', '2021-06-16 13:52:03', 0, '1100003175P', 'CAUET', 'Clement');
 
 -- --------------------------------------------------------
 
@@ -142,16 +177,6 @@ INSERT INTO `vestiaire` (`id`, `nom`, `quantite`, `quantiteMin`) VALUES
 (1, 'truc1', 20, 42),
 (2, 'truc2', 0, 10),
 (3, 'truc3', 46, 22);
-
---
--- Contraintes pour les tables déchargées
---
-
---
--- Contraintes pour la table `main_courante`
---
-ALTER TABLE `main_courante`
-  ADD CONSTRAINT `main_courante_ibfk_1` FOREIGN KEY (`idUser`) REFERENCES `user` (`nivol`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
