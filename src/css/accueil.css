@@ -31,6 +31,10 @@ h3 {
     text-align: center;
 }
 
+.title a {
+    text-decoration: none;
+}
+
 .show-more {
     text-align: right;
 }
@@ -41,22 +45,24 @@ h3 {
     cursor: pointer;
 }
 
-.urgence{
+.urgence, .annonce, .maj {
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.urgence {
     color: white;
     background-color: #cc0000;
-    border-radius: 5px;
 }
 
-.annonce{
+.annonce {
     color: black;
     background-color: #feff18;
-    border-radius: 5px;
 }
 
-.maj{
+.maj {
     color: white;
     background-color:#000099;
-    border-radius: 5px;
 }
 
 .paragraph {

@@ -251,7 +251,7 @@
                         <div class="admin">
                             <label>Administrateur</label>
                             <select class="form-input" id="admin" name="admin" required>
-                                <option value="<?php echo $tab['admin']; ?>"><?php echo $tab['admin']; ?></option>
+                                <option value="<?= $tab['admin']; ?>"><?= $tab['admin']; ?></option>
                                 <?php
                                     if($tab['admin'] == 'Oui'){
                                         ?><option value="Non">Non</option><?php

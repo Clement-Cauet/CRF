@@ -194,6 +194,154 @@
             <?php
         }
 
+        public function insertNews($user){
+            if(isset($_POST["titleNews"]) && isset($_POST["typeNews"]) && isset($_POST["textNews"]) && isset($_POST["submitNews"])){
+                if($_POST["textNews"] != "" && $_POST["titleNews"] != ""){
+                    $nivol = $user->getNivol();
+                    $nom = $user->getNom();
+                    $prenom = $user->getPrenom();
+                    $this->_text = $_POST["titleNews"];
+                    $this->checkMessage($this->_text);
+                    $titleNews = $this->_text;
+                    $this->_text = $_POST["textNews"];
+                    $this->checkMessage($this->_text);
+                    $textNews = $this->_text;
+                    $typeNews = $_POST["typeNews"];
+                    $this->_req = "INSERT INTO `actualite`(`titre`, `message`, `date`, `type`, `nivolUser`, `nomUser`, `prenomUser`) VALUES ('$titleNews', '$textNews', NOW(), '$typeNews', '$nivol', '$nom', '$prenom')";
+                    $Result = $this->_bdd->query($this->_req);
+                    unset($_POST);
+                    header("Refresh:0");
+                }
+            }
+            ?>
+                <form method="post" class="form-news">
+                    <div class="title">
+                        <label>Titre de l'article :</label>
+                        <input type="text" name="titleNews" class="titleNews" placeholder="Saisissez un titre..." autocomplete="off" required>
+                    </div>
+                    <div class="type">
+                        <label>Type de l'article :</label>
+                        <select name="typeNews" class="typeNews" required>
+                            <option value=""></option>
+                            <option value="urgence">Urgence</option>
+                            <option value="annonce">Annonce</option>
+                            <option value="maj">Mise à jour</option>
+                        </select>
+                    </div>
+                    <div class="text">
+                        <label>Contenu de l'article :</label>
+                        <textarea name="textNews" class="textNews" placeholder="Saisissez votre contenu..." autocomplete="off" required></textarea>
+                    </div>
+                    <input type="submit" name="submitNews" class="submitNews" value="Envoyer">
+                </form>
+            <?php
+        }
+
+        public function editSelectNews(){
+            $this->_req = "SELECT `id`, `titre`, `message`, DATE_FORMAT(`date`, '%d/%m/%Y %H:%i:%s'), `type`, `nivolUser`, `nomUser`, `prenomUser` 
+                            FROM `actualite`
+                            ORDER BY `date` DESC";
+            $Result = $this->_bdd->query($this->_req);
+            ?>
+                <div class="bloc-news">
+            <?php
+                while($tab = $Result->fetch()){
+                    ?>
+                        <div class="news">
+                            <div class="title">
+                                <a href="./src/edit/actualite.php?news=<?= $tab['id']; ?>">
+                                    <?php 
+                                        if($tab["type"] == "urgence"){ 
+                                            ?><h3 class="urgence"><?= $tab["titre"]; ?></h3><?php 
+                                        }elseif($tab["type"] == "annonce"){ 
+                                            ?><h3 class="annonce"><?= $tab["titre"]; ?></h3><?php 
+                                        }elseif($tab["type"] == "maj"){ 
+                                            ?><h3 class="maj"><?= $tab["titre"]; ?></h3><?php 
+                                        }
+                                    ?>
+                                    </a>
+                                <div class="show-more">
+                                    <button onclick="show(<?= $tab['id']; ?>)"><i id="fa-chevron-down[<?= $tab['id']; ?>]" class="fas fa-chevron-down"></i></button>
+                                </div>
+                            </div>
+                            <p id="paragraph[<?= $tab['id']; ?>]" class="paragraph">
+                                <?= $tab["message"]; ?>
+                            </p>
+                            <div id="editor[<?= $tab['id']; ?>]" class="editor">
+                                <?= $tab["prenomUser"]." ".$tab["nomUser"]." (". $tab["nivolUser"]."), le ".$tab[3]; ?>
+                            </div>
+                        </div>
+                    <?php
+                }
+            ?>
+                </div>
+            <?php
+        }
+
+        public function updateNews($id){
+            $titleNews = $_POST['titleNews']; $typeNews = $_POST['typeNews']; $textNews = $_POST['textNews'];
+            $this->_req = "UPDATE `actualite` SET `titre`= '$titleNews',`type`= '$typeNews',`message`= '$textNews' WHERE `id` = '".$id."'";
+            $Result = $this->_bdd->query( $this->_req );
+            unset($_POST);
+        }
+
+        public function deleteNews($id){
+            $this->_req = "DELETE FROM `actualite` WHERE `id` = '".$id."'";
+            $Result = $this->_bdd->query( $this->_req );
+            unset($_POST);
+        }
+
+        public function formNews($id){
+            $this->_req = "SELECT `titre`, `message`, `date`, `type`, `nivolUser`, `nomUser`, `prenomUser` FROM `actualite` WHERE `id`=$id";
+            $Result = $this->_bdd->query($this->_req);
+            while($tab = $Result->fetch()){
+                ?>
+                    <form method="post" class="form-news">
+                        <div class="title">
+                            <label>Titre de l'article :</label>
+                            <input type="text" name="titleNews" class="titleNews" placeholder="Saisissez un titre..." value="<?= $tab['titre']; ?>" autocomplete="off" required>
+                        </div>
+                        <div class="type">
+                            <label>Type de l'article :</label>
+                            <select name="typeNews" class="typeNews" required>
+                                <?php
+                                    if($tab['type'] == 'urgence'){
+                                        ?>
+                                            <option value="urgence">Urgence</option>
+                                            <option value="annonce">Annonce</option>
+                                            <option value="maj">Mise à jour</option>
+                                        <?php
+                                    }elseif($tab['type'] == 'annonce'){
+                                        ?>
+                                            <option value="annonce">Annonce</option>
+                                            <option value="urgence">Urgence</option>
+                                            <option value="maj">Mise à jour</option>
+                                        <?php
+                                    }else{
+                                        ?>
+                                            <option value="maj">Mise à jour</option>
+                                            <option value="urgence">Urgence</option>
+                                            <option value="annonce">Annonce</option>
+                                        <?php
+                                    }
+                                ?>
+                            </select>
+                        </div>
+                        <div class="text">
+                            <label>Contenu de l'article :</label>
+                            <textarea name="textNews" class="textNews" placeholder="Saisissez votre contenu ..." autocomplete="off" required><?= $tab['message']; ?></textarea>
+                        </div>
+                        <div class="button">
+                            <input type="submit" id="save" name="save" value="Enregistrer">
+                            <input type="submit" id="suppr_confirm" name="suppr_confirm" value="Supprimer définitivement">
+                            <input type="button" id="suppr" name="suppr" value="Supprimer">
+                            <input type="button" id="cancel" name="cancel" value="Annuler">
+                        </div>
+                    </form>
+                <?php
+            }
+        }
+
     }
 
 ?>

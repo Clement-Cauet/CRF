@@ -1,0 +1,83 @@
+.form-actualite {
+    position: relative;
+    width: 50%;
+    padding: 20px 20px 20px;
+    margin-top: 5%;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #f8f9fa;
+    border: 1px solid;
+    border-color: #e7e7e7;
+    border-radius: 5px;
+}
+
+.title, .type, .text {
+    position: relative;
+    width: 80%;
+    margin-top: 1%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.titleNews {
+    width: 100%;
+    height: 35px;
+}
+
+.type {
+    text-align: center;
+}
+
+.textNews {
+    max-width: 100%;
+    min-width: 100%;
+    height: 10rem;
+    min-height: 1rem;
+}
+
+.button {
+    position: relative;
+    height: 35px;
+}
+
+#save, #suppr, #suppr_confirm, #cancel {
+    position: relative;
+    width: 80px;
+    height: 30px;
+    margin: 5px;
+    float: right;
+    border-width: 1px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+#save {
+    color: white;
+    background-color:#000099;
+}
+
+#suppr, #suppr_confirm {
+    color: white;
+    background-color: #CC0000;
+}
+
+#suppr_confirm {
+    width: 180px;
+}
+
+#cancel {
+    color: #CC0000;
+    background-color: white;
+}
+
+@media screen and (max-width: 1350px) {
+    .form-input {
+        width: 95%;
+    }
+} 
+
+@media screen and (max-width: 950px) {
+    .form-benevole {
+        width: 80%;
+    }
+} 
