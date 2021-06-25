@@ -83,7 +83,7 @@
                                 if($tab["nivolUser"] == $user->getNivol() && $tab["message"] != "Se connecte sur l'opération"){
                                     ?>
                                         <form method="post">
-                                            <p id="paragraph[<?= $tab['id']; ?>]" ondblclick="update(<?= $tab['id']; ?>)" class="paragraph"><?= $tab["message"]; ?></p>
+                                            <p id="paragraph[<?= $tab['id']; ?>]" ondblclick="update(<?= $tab['id']; ?>)" class="messageContent"><?= $tab["message"]; ?></p>
                                             <input type="text" id="updateMessage[<?= $tab['id']; ?>]" name="updateMessage" class="updateMessage" value="<?= $tab["message"]; ?>" autocomplete="off">
                                             <input type="submit" id="updateSubmit[<?= $tab['id']; ?>]" name="updateSubmit" class="updateSubmit" value="Modifier">
                                         </form>
@@ -138,7 +138,7 @@
 
         public function updateMessage($id){
             if(isset($_POST["updateSubmit"])){
-                $this->_text = $_POST["updateSubmit"];
+                $this->_text = $_POST["updateMessage"];
                 $this->checkMessage($this->_text);
                 $this->_req = "UPDATE `main_courante` SET `message`= '$this->_text' WHERE `id` = $id";
                 $Result = $this->_bdd->query($this->_req);
@@ -152,6 +152,87 @@
                 $Result = $this->_bdd->query($this->_req);
                 unset($_POST);
                 header("Refresh:0");
+            }
+        }
+
+        public function editSelectMessage($message){
+            $this->_req = "SELECT `id`, `message`, DATE_FORMAT(`date`, '%d/%m/%Y %H:%i:%s'), `report`, `nivolUser`, `nomUser`, `prenomUser` 
+                            FROM `main_courante`
+                            ORDER BY `date` DESC";
+            $Result = $this->_bdd->query($this->_req);
+            ?>
+                <div class="bloc-message">
+            <?php
+                while($tab = $Result->fetch()){
+                    ?>
+                        <div class="message">
+                            <h3>
+                                <?php 
+                                    if($tab["report"] == 1){
+                                        ?><i class="fas fa-exclamation-triangle"></i> <?php
+                                    }
+                                    echo $tab["prenomUser"]." ".$tab["nomUser"]." (". $tab["nivolUser"]."), le ".$tab[2]; 
+                                    if($tab["message"] != "Se connecte sur l'opération"){
+                                        ?>
+                                            <button class="button-message" onclick="option(<?= $tab['id']; ?>)">
+                                                <i class="fas fa-ellipsis-h"></i>
+                                            </button>
+                                        <?php
+                                        $this->editOptionMessage($tab["id"]);
+                                    } 
+                                ?>
+                            </h3>
+                            <?php
+                                if($tab["message"] != "Se connecte sur l'opération"){
+                                    ?>
+                                        <form method="post">
+                                            <p id="paragraph[<?= $tab['id']; ?>]" ondblclick="update(<?= $tab['id']; ?>)" class="messageContent"><?= $tab["message"]; ?></p>
+                                            <input type="text" id="updateMessage[<?= $tab['id']; ?>]" name="updateMessage" class="updateMessage" value="<?= $tab["message"]; ?>" autocomplete="off">
+                                            <input type="submit" id="updateSubmit[<?= $tab['id']; ?>]" name="updateSubmit" class="updateSubmit" value="Modifier">
+                                        </form>
+                                    <?php
+                                    $this->updateMessage($tab['id']);
+                                }else{
+                                    ?>
+                                        <p><?= $tab["message"]; ?></p>
+                                    <?php
+                                }
+                            ?>
+                        </div>
+                    <?php
+                }
+            ?>
+                </div>
+            <?php
+        }
+
+        public function editOptionMessage($id){
+            if(isset($_POST["report$id"])){
+                $this->_req = "UPDATE `main_courante` SET `report`= 1 WHERE `id` = $id";
+                $Result = $this->_bdd->query($this->_req);
+            }
+            if(isset($_POST["unreport$id"])){
+                $this->_req = "UPDATE `main_courante` SET `report`= 0 WHERE `id` = $id";
+                $Result = $this->_bdd->query($this->_req);
+            }
+            $this->deleteMessage($id);
+            $this->_req = "SELECT `report` FROM `main_courante` WHERE `id` = $id";
+            $Result = $this->_bdd->query($this->_req);
+            while($tab = $Result->fetch()){
+                ?>
+                    <div id="option-message[<?= $id; ?>]" class="option-message">
+                        <form method="post">
+                            <?php
+                                if($tab['report'] == 0){
+                                   ?><input type="submit" class="option" name="report<?= $id; ?>" value="Signaler"><?php 
+                                }else{
+                                    ?><input type="submit" class="option" name="unreport<?= $id; ?>" value="Désignaliser"><?php
+                                }
+                            ?>
+                            <input type="submit" class="option" name="delete" value="Supprimer">
+                        </form>
+                    </div>
+                <?php
             }
         }
 
@@ -176,6 +257,47 @@
                                         ?><h3 class="maj"><?= $tab["titre"]; ?></h3><?php 
                                     }
                                 ?>
+                                <div class="show-more">
+                                    <button onclick="show(<?= $tab['id']; ?>)"><i id="fa-chevron-down[<?= $tab['id']; ?>]" class="fas fa-chevron-down"></i></button>
+                                </div>
+                            </div>
+                            <p id="paragraph[<?= $tab['id']; ?>]" class="paragraph">
+                                <?= $tab["message"]; ?>
+                            </p>
+                            <div id="editor[<?= $tab['id']; ?>]" class="editor">
+                                <?= $tab["prenomUser"]." ".$tab["nomUser"]." (". $tab["nivolUser"]."), le ".$tab[3]; ?>
+                            </div>
+                        </div>
+                    <?php
+                }
+            ?>
+                </div>
+            <?php
+        }
+
+        public function editSelectNews(){
+            $this->_req = "SELECT `id`, `titre`, `message`, DATE_FORMAT(`date`, '%d/%m/%Y %H:%i:%s'), `type`, `nivolUser`, `nomUser`, `prenomUser` 
+                            FROM `actualite`
+                            ORDER BY `date` DESC";
+            $Result = $this->_bdd->query($this->_req);
+            ?>
+                <div class="bloc-news">
+            <?php
+                while($tab = $Result->fetch()){
+                    ?>
+                        <div class="news">
+                            <div class="title">
+                                <a href="./src/edit/actualite.php?news=<?= $tab['id']; ?>">
+                                    <?php 
+                                        if($tab["type"] == "urgence"){ 
+                                            ?><h3 class="urgence"><?= $tab["titre"]; ?></h3><?php 
+                                        }elseif($tab["type"] == "annonce"){ 
+                                            ?><h3 class="annonce"><?= $tab["titre"]; ?></h3><?php 
+                                        }elseif($tab["type"] == "maj"){ 
+                                            ?><h3 class="maj"><?= $tab["titre"]; ?></h3><?php 
+                                        }
+                                    ?>
+                                    </a>
                                 <div class="show-more">
                                     <button onclick="show(<?= $tab['id']; ?>)"><i id="fa-chevron-down[<?= $tab['id']; ?>]" class="fas fa-chevron-down"></i></button>
                                 </div>
@@ -232,49 +354,10 @@
                         <label>Contenu de l'article :</label>
                         <textarea name="textNews" class="textNews" placeholder="Saisissez votre contenu..." autocomplete="off" required></textarea>
                     </div>
-                    <input type="submit" name="submitNews" class="submitNews" value="Envoyer">
+                    <div class="submit-button">
+                        <input type="submit" name="submitNews" class="submit" value="Ajouter">
+                    </div>
                 </form>
-            <?php
-        }
-
-        public function editSelectNews(){
-            $this->_req = "SELECT `id`, `titre`, `message`, DATE_FORMAT(`date`, '%d/%m/%Y %H:%i:%s'), `type`, `nivolUser`, `nomUser`, `prenomUser` 
-                            FROM `actualite`
-                            ORDER BY `date` DESC";
-            $Result = $this->_bdd->query($this->_req);
-            ?>
-                <div class="bloc-news">
-            <?php
-                while($tab = $Result->fetch()){
-                    ?>
-                        <div class="news">
-                            <div class="title">
-                                <a href="./src/edit/actualite.php?news=<?= $tab['id']; ?>">
-                                    <?php 
-                                        if($tab["type"] == "urgence"){ 
-                                            ?><h3 class="urgence"><?= $tab["titre"]; ?></h3><?php 
-                                        }elseif($tab["type"] == "annonce"){ 
-                                            ?><h3 class="annonce"><?= $tab["titre"]; ?></h3><?php 
-                                        }elseif($tab["type"] == "maj"){ 
-                                            ?><h3 class="maj"><?= $tab["titre"]; ?></h3><?php 
-                                        }
-                                    ?>
-                                    </a>
-                                <div class="show-more">
-                                    <button onclick="show(<?= $tab['id']; ?>)"><i id="fa-chevron-down[<?= $tab['id']; ?>]" class="fas fa-chevron-down"></i></button>
-                                </div>
-                            </div>
-                            <p id="paragraph[<?= $tab['id']; ?>]" class="paragraph">
-                                <?= $tab["message"]; ?>
-                            </p>
-                            <div id="editor[<?= $tab['id']; ?>]" class="editor">
-                                <?= $tab["prenomUser"]." ".$tab["nomUser"]." (". $tab["nivolUser"]."), le ".$tab[3]; ?>
-                            </div>
-                        </div>
-                    <?php
-                }
-            ?>
-                </div>
             <?php
         }
 

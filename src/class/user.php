@@ -145,18 +145,18 @@
                     <tbody>
                         <?php while($tab = $Result->fetch()){ ?>
 
-                            <tr id="<?php echo $tab['nivol']; ?>">
+                            <tr id="<?= $tab['nivol']; ?>">
                                 <td>
-                                    <div><a href="./src/edit/benevole.php?user=<?= $tab['nivol']; ?>"><?php echo $tab['nivol']; ?></a></div>
+                                    <div><a href="./src/edit/benevole.php?user=<?= $tab['nivol']; ?>"><?= $tab['nivol']; ?></a></div>
                                 </td>
                                 <td >
-                                    <div><a href="./src/edit/benevole.php?user=<?= $tab['nivol']; ?>"><?php echo $tab['nom']; ?></a></div>
+                                    <div><a href="./src/edit/benevole.php?user=<?= $tab['nivol']; ?>"><?= $tab['nom']; ?></a></div>
                                 </td>
                                 <td >
-                                    <div><a href="./src/edit/benevole.php?user=<?= $tab['nivol']; ?>"><?php echo $tab['prenom']; ?></a></div>
+                                    <div><a href="./src/edit/benevole.php?user=<?= $tab['nivol']; ?>"><?= $tab['prenom']; ?></a></div>
                                 </td>
                                 <td >
-                                    <div><a href="./src/edit/benevole.php?user=<?= $tab['nivol']; ?>"><?php echo $tab['admin']; ?></a></div>
+                                    <div><a href="./src/edit/benevole.php?user=<?= $tab['nivol']; ?>"><?= $tab['admin']; ?></a></div>
                                 </td>
                             </tr>
 
@@ -173,19 +173,19 @@
             ?>
                 <form method="post">
                     <div class="nivol">
-                        <label>Nivol</label>
+                        <label>Nivol : </label>
                         <input type="text" id="nivol" name="nivol" class="form-input" placeholder="Nivol" required>
                     </div>
                     <div class="account">
-                        <label>Login</label>
+                        <label>Login : </label>
                         <input type="text" id="login" name="login" class="form-input" placeholder="Login" required>
-                        <label>Mot de passe</label>
+                        <label>Mot de passe : </label>
                         <input type="text" id="mdp" name="mdp" class="form-input" placeholder="Mot de passe" required>
                     </div>
                     <div class="name">
-                        <label>Nom</label>
+                        <label>Nom : </label>
                         <input type="text" id="nom" name="nom" class="form-input" placeholder="Nom" required>
-                        <label>Prénom</label>
+                        <label>Prénom : </label>
                         <input type="text" id="prenom" name="prenom" class="form-input" placeholder="Prénom" required>
                     </div>
                     <div class="admin">
@@ -196,8 +196,8 @@
                             <option value="Non">Non</option>
                         </select>
                     </div>
-                    <div class="insert-button">
-                        <input type="submit" name="submit" class="insert" value="Ajouter">
+                    <div class="submit-button">
+                        <input type="submit" name="submit" class="submit" value="Ajouter">
                     </div>
                 </form>
             <?php
@@ -233,20 +233,20 @@
                     <form method="post">
                         <div class="nivol">
                             <label>Nivol</label>
-                            <input type="text" id="id" value="<?php echo $tab['nivol']; ?>" hidden>
-                            <input type="text" class="form-input" id="nivol" name="nivol" value="<?php echo $tab['nivol']; ?>" required>
+                            <input type="text" id="id" value="<?= $tab['nivol']; ?>" hidden>
+                            <input type="text" class="form-input" id="nivol" name="nivol" value="<?= $tab['nivol']; ?>" required>
                         </div>
                         <div class="account">
                             <label>Login</label>
-                            <input type="text" class="form-input" id="login" name="login" value="<?php echo $tab['login']; ?>" required>
+                            <input type="text" class="form-input" id="login" name="login" value="<?= $tab['login']; ?>" required>
                             <label>Mot de passe</label>
-                            <input type="text" class="form-input" id="mdp" name="mdp" value="<?php echo $tab['mdp']; ?>" required>
+                            <input type="text" class="form-input" id="mdp" name="mdp" value="<?= $tab['mdp']; ?>" required>
                         </div>
                         <div class="name">
                             <label>Nom</label>
-                            <input type="text" class="form-input" id="nom" name="nom" value="<?php echo $tab['nom']; ?>" required>
+                            <input type="text" class="form-input" id="nom" name="nom" value="<?= $tab['nom']; ?>" required>
                             <label>Prénom</label>
-                            <input type="text" class="form-input" id="prenom" name="prenom" value="<?php echo $tab['prenom']; ?>" required>
+                            <input type="text" class="form-input" id="prenom" name="prenom" value="<?= $tab['prenom']; ?>" required>
                         </div>
                         <div class="admin">
                             <label>Administrateur</label>

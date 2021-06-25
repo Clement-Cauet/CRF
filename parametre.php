@@ -14,6 +14,7 @@
             <link rel='stylesheet' type='text/css' href='src/css/index.css'>
             <link rel='stylesheet' type='text/css' href='src/css/accueil.css'>
             <link rel='stylesheet' type='text/css' href='src/css/inventaire.css'>
+            <link rel='stylesheet' type='text/css' href='src/css/main_courante.css'>
             <link rel='stylesheet' type='text/css' href='src/css/parametre.css'>
             <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
         </head>
@@ -30,7 +31,7 @@
                                     <div class="img-gestion">
                                         <i class="fas fa-user"></i>
                                     </div>
-                                    <p>Gestion des Bénévoles</p>
+                                    <div>Gestion des Bénévoles</div>
                                 </button>
 
                                 <!-- Button Gestion Pharmacie -->
@@ -38,7 +39,7 @@
                                     <div class="img-gestion">
                                         <i class="fas fa-medkit"></i>
                                     </div>
-                                    <p>Gestion de la Pharmacie</p>
+                                    <div>Gestion de la Pharmacie</div>
                                 </button>
 
                                 <!-- Button Gestion Base log -->
@@ -46,7 +47,7 @@
                                     <div class="img-gestion">
                                         <i class="fas fa-ambulance"></i>
                                     </div>
-                                    <p>Gestion de la Base Log</p>
+                                    <div>Gestion de la Base Log</div>
                                 </button>
 
                                 <!-- Button Gestion Vestiaire -->
@@ -54,7 +55,7 @@
                                     <div class="img-gestion">
                                         <i class="fas fa-tshirt"></i>
                                     </div>
-                                    <p>Gestion du Vestiaire</p>
+                                    <div>Gestion du Vestiaire</div>
                                 </button>
 
                                 <!-- Button Gestion Main Courante -->
@@ -62,7 +63,7 @@
                                     <div class="img-gestion">
                                         <i class="far fa-clock"></i>
                                     </div>
-                                    <p>Gestion de la Main Courante</p>
+                                    <div>Gestion de la Main Courante</div>
                                 </button>
 
                                 <!-- Button Gestion Actualité -->
@@ -70,7 +71,7 @@
                                     <div class="img-gestion">
                                         <i class="far fa-newspaper"></i>
                                     </div>
-                                    <p>Gestion des Actualités</p>
+                                    <div>Gestion des Actualités</div>
                                 </button>
                             </div>
 
@@ -110,7 +111,10 @@
                                         Annuler
                                     </button>
                                 </div>
-                                <?php $inventaire->select('pharmacie'); ?>
+                                <div id="formPharmacie" class="form-gestion">
+                                    <?php $inventaire->insertInventory('pharmacie'); ?>
+                                </div>
+                                <?php $inventaire->editSelect('pharmacie'); ?>
                             </div>
 
                             <!-- Gestion Base log -->
@@ -124,7 +128,10 @@
                                         Annuler
                                     </button>
                                 </div>
-                                <?php $inventaire->select('base_log'); ?>
+                                <div id="formBaseLog" class="form-gestion">
+                                    <?php $inventaire->insertInventory('base_log'); ?>
+                                </div>
+                                <?php $inventaire->editSelect('base_log'); ?>
                             </div>
 
                             <!-- Gestion Vestiaire -->
@@ -138,12 +145,15 @@
                                         Annuler
                                     </button>
                                 </div>
-                                <?php $inventaire->select('vestiaire'); ?>
+                                <div id="formVestiaire" class="form-gestion">
+                                    <?php $inventaire->insertInventory('vestiaire'); ?>
+                                </div>
+                                <?php $inventaire->editSelect('vestiaire'); ?>
                             </div>
 
                             <!-- Gestion Main Courante -->
                             <div id="gestionMainCourante" class="gestion">
-                                <?php //$message->selectMessage(); ?>
+                                <?php $message->editSelectMessage($message); ?>
                             </div>
 
                             <!-- Gestion Actualité -->
@@ -163,6 +173,7 @@
                                 <?php $message->editSelectNews(); ?>
                             </div>
                             <script type="text/javascript" src="src/js/parametre.js"></script>
+                            <script type="text/javascript" src="src/js/message.js"></script>
                             <script type="text/javascript" src="src/js/accueil.js"></script>
                         </div>
 

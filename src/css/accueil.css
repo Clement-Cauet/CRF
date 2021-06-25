@@ -89,3 +89,9 @@ h3 {
 .rotate-button {
     transform: rotate(180deg);
 }
+
+@media screen and (max-width: 950px) {
+    .news-block {
+        width: 80%;
+    }
+} 

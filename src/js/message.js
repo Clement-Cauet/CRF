@@ -27,9 +27,9 @@ window.onclick = function(event){
                 openUpdateSubmit.classList.remove('show-update');
             }
         }
-        var paragraph = document.getElementsByClassName("paragraph");
-        for(var i=0; i<paragraph.length; i++){
-            paragraph[i].hidden = false;
+        var messageContent = document.getElementsByClassName("messageContent");
+        for(var i=0; i<messageContent.length; i++){
+            messageContent[i].hidden = false;
         }
     }
 }

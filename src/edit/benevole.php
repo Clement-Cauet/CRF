@@ -21,7 +21,7 @@
                 <title>Bénévole - Inventaire - Croix-Rouge française</title>
                 <link rel="icon" type="image/png" href="../img/croix-rouge.png">
                 <link rel='stylesheet' type='text/css' href='../css/index.css'>
-                <link rel='stylesheet' type='text/css' href='../css/benevole.css'>
+                <link rel='stylesheet' type='text/css' href='../css/edit.css'>
                 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
             </head>
             <body>
@@ -29,7 +29,7 @@
                     include("menuedit.php");
                 ?>
                 <div class="back">
-                    <h2><?php echo $benevole->getNom()." ".$benevole->getPrenom()." (".$benevole->getNivol().")"; ?></h2>
+                    <h2><?= $benevole->getNom()." ".$benevole->getPrenom()." (".$benevole->getNivol().")"; ?></h2>
                     <div class="form-benevole">
                         <?php $benevole->formUser($_GET["user"]); ?>
                     </div>
