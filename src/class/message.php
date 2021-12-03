@@ -10,16 +10,19 @@
         private $_req;
 
         /* METHOD */
+        //Constructeur
         public function __construct($bdd){
             $this->_bdd = $bdd;
         }
 
+        //Initialisation des variables de la classe message
         public function setMessage($id, $text, $date){
             $this->_id = $id;
             $this->_text = $text;
             $this->_date = $date;
         }
 
+        //Vérifie les caractères spéciaux et les isolent de la requète
         public function checkMessage($text){
             for($i=0; $i<strlen($text); $i++){
                 if($text[$i] == "'" || $text[$i] == '"' || $text[$i] == "`"){
@@ -30,6 +33,7 @@
             $this->_text = $text;
         }
 
+        //Affiche le menu des options du message
         public function optionMessage($id, $nivol, $user){
             if(isset($_POST["report$id"])){
                 $this->_req = "UPDATE `main_courante` SET `report`= 1 WHERE id = $id";
@@ -52,6 +56,7 @@
             <?php
         }
 
+        //Affiche les messages
         public function selectMessage($message, $user){
             $this->_req = "SELECT `id`, `message`, DATE_FORMAT(`date`, '%d/%m/%Y %H:%i:%s'), `report`, `nivolUser`, `nomUser`, `prenomUser` 
                             FROM `main_courante`
@@ -103,6 +108,7 @@
             <?php
         }
 
+        //Envoie d'un automatique quand un utilisateur se connecte
         public function loginMessage($user){
             $nivol = $user->getNivol();
             $nom = $user->getNom();
@@ -113,6 +119,7 @@
             $Result = $this->_bdd->query($this->_req);
         }
 
+        //Ajoute un message en BDD
         public function insertMessage($user){
             if(isset($_POST["messageBar"]) && isset($_POST["submitMessage"])){
                 if($_POST["messageBar"] != ""){
@@ -136,6 +143,7 @@
             <?php
         }
 
+        //Modifie un messages en BDD
         public function updateMessage($id){
             if(isset($_POST["updateSubmit"])){
                 $this->_text = $_POST["updateMessage"];
@@ -146,6 +154,7 @@
             }
         }
 
+        //Supprime un message en BDD
         public function deleteMessage($id){
             if(isset($_POST["delete"])){
                 $this->_req = "DELETE FROM `main_courante` WHERE `id`= $id";
@@ -155,6 +164,7 @@
             }
         }
 
+        //Affiche les messages sur la page de paramètre 
         public function editSelectMessage($message){
             $this->_req = "SELECT `id`, `message`, DATE_FORMAT(`date`, '%d/%m/%Y %H:%i:%s'), `report`, `nivolUser`, `nomUser`, `prenomUser` 
                             FROM `main_courante`
@@ -206,6 +216,7 @@
             <?php
         }
 
+        //Affiche le menu des options du message sur la page de paramètre 
         public function editOptionMessage($id){
             if(isset($_POST["report$id"])){
                 $this->_req = "UPDATE `main_courante` SET `report`= 1 WHERE `id` = $id";
@@ -236,6 +247,7 @@
             }
         }
 
+        //Affiche les annonces
         public function selectNews(){
             $this->_req = "SELECT `id`, `titre`, `message`, DATE_FORMAT(`date`, '%d/%m/%Y %H:%i:%s'), `type`, `nivolUser`, `nomUser`, `prenomUser` 
                             FROM `actualite`
@@ -275,6 +287,7 @@
             <?php
         }
 
+        //Affiche les annonces sur la page de paramètre
         public function editSelectNews(){
             $this->_req = "SELECT `id`, `titre`, `message`, DATE_FORMAT(`date`, '%d/%m/%Y %H:%i:%s'), `type`, `nivolUser`, `nomUser`, `prenomUser` 
                             FROM `actualite`
@@ -316,6 +329,7 @@
             <?php
         }
 
+        //Ajout d'une annonce en BDD
         public function insertNews($user){
             if(isset($_POST["titleNews"]) && isset($_POST["typeNews"]) && isset($_POST["textNews"]) && isset($_POST["submitNews"])){
                 if($_POST["textNews"] != "" && $_POST["titleNews"] != ""){
@@ -361,6 +375,7 @@
             <?php
         }
 
+        //Modifie l'annonce en BDD
         public function updateNews($id){
             $titleNews = $_POST['titleNews']; $typeNews = $_POST['typeNews']; $textNews = $_POST['textNews'];
             $this->_req = "UPDATE `actualite` SET `titre`= '$titleNews',`type`= '$typeNews',`message`= '$textNews' WHERE `id` = '".$id."'";
@@ -368,12 +383,14 @@
             unset($_POST);
         }
 
+        //Supprime l'annonce en BDD
         public function deleteNews($id){
             $this->_req = "DELETE FROM `actualite` WHERE `id` = '".$id."'";
             $Result = $this->_bdd->query( $this->_req );
             unset($_POST);
         }
 
+        //Formulaire de gestion des annonces
         public function formNews($id){
             $this->_req = "SELECT `titre`, `message`, `date`, `type`, `nivolUser`, `nomUser`, `prenomUser` FROM `actualite` WHERE `id`=$id";
             $Result = $this->_bdd->query($this->_req);

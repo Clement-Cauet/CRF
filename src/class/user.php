@@ -13,10 +13,12 @@
         private $_req;
 
         /* METHOD */
+        //Constructeur
         public function __construct($bdd){
             $this->_bdd = $bdd;
         }
 
+        //Initialisation des variables de la classe message
         public function setUser($nivol, $login, $mdp, $nom, $prenom, $admin){
             $this->_nivol = $nivol;
             $this->_login = $login;
@@ -26,6 +28,7 @@
             $this->_admin = $admin;
         }
 
+        //Initialisation de la fonction setUser()
         public function setUserByNivol($nivol){
             $req = "SELECT * FROM `user` WHERE `nivol`='".$nivol."'";
             $Result = $this->_bdd->query($req);
@@ -34,22 +37,27 @@
             }
         }
 
+        //Retourne la variable $_nivol
         public function getNivol(){
             return $this->_nivol;
         }
 
+        //Retourne la variable $_nom
         public function getNom(){
             return $this->_nom;
         }
 
+        //Retourne la variable $_prenom
         public function getPrenom(){
             return $this->_prenom;
         }
 
+        //Retourne la variable $_admin
         public function getAdmin(){
             return $this->_admin;
         }
 
+        //Connexion à l'application
         public function connexion($message){
             $afficheForm = true;
             $error = false;
@@ -104,6 +112,7 @@
             }
         }
 
+        //Déconnexion de l'application
         public function deconnexion(){
             session_unset();
             session_destroy();
@@ -111,6 +120,7 @@
             header("Refresh:0");
         }
 
+        //Barre de recherche
         public function searchBar(){
             if(isset($_GET['search'])){
                 $search = $_GET['search'];
@@ -128,6 +138,7 @@
             <?php
         }
 
+        //Affichage des utilisateurs
         public function selectUser(){
             $this->_req = "SELECT `nivol`, `nom`, `prenom`, `admin` FROM `user` WHERE 1";
             $this->searchBar();
@@ -169,6 +180,7 @@
             <?php
         }
 
+        //Ajout d'un utilisateur en BDD
         public function insertUser(){
             ?>
                 <form method="post">
@@ -210,6 +222,7 @@
             }
         }
 
+        //Modifie un utilisateur en BDD
         public function updateUser($id){
             $nivol = $_POST['nivol']; $login = $_POST['login']; $mdp = $_POST['mdp']; $nom = $_POST['nom']; $prenom = $_POST['prenom']; $admin = $_POST['admin'];
             $nom = strtoupper($nom);
@@ -218,12 +231,14 @@
             unset($_POST);
         }
 
+        //Supprime un utilisateur en BDD
         public function deleteUser($id){
             $this->_req = "DELETE FROM `user` WHERE `nivol` = '".$id."'";
             $Result = $this->_bdd->query( $this->_req );
             unset($_POST);
         }
 
+        //Formulaire de gestion des utilisateurs
         public function formUser($id){
             $this->_req = "SELECT `nivol`, `login`, `mdp`, `nom`, `prenom`, `admin` FROM `user` WHERE `nivol` = '".$id."'";
             $Result = $this->_bdd->query( $this->_req );

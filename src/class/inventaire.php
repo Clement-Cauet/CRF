@@ -11,10 +11,12 @@
         private $_req;
 
         /* METHOD */
+        //Constructeur
         public function __construct($bdd){
             $this->_bdd = $bdd;
         }
 
+        //Barre de recherche
         public function searchBar(){
             if(isset($_GET['search'])){
                 $search = $_GET['search'];
@@ -32,6 +34,7 @@
             <?php
         }
 
+        //Affichge des inventaires
         public function select($table){
             $this->_req = "SELECT * FROM `$table` WHERE 1";
             $this->searchBar();
@@ -82,6 +85,7 @@
             <?php
         }
 
+        //Recherche les fourniture manquante de chaque table
         public function commande($table){
             $this->_req = "SELECT COUNT(*) FROM `$table` WHERE $table.quantite < $table.quantiteMin";
             $Result = $this->_bdd->query($this->_req);
@@ -139,6 +143,7 @@
             }
         }
 
+        //Affichage des fournitures dans un tableau
         public function editSelect($table){
             $this->_req = "SELECT * FROM `$table` WHERE 1";
             $this->searchBar();
@@ -179,6 +184,7 @@
             <?php
         }
 
+        //Ajoute une fourniture en BDD 
         public function insertInventory($table){
             if(isset($_POST["nameInventory"]) && isset($_POST["quantityInventory"]) && isset($_POST["quantityMinInventory"]) && isset($_POST["submitInventory"])){
                 if($_POST["nameInventory"] != ""){
@@ -210,6 +216,7 @@
             <?php
         }
 
+        //Modifie une fourniture en BDD
         public function updateInventory($id, $table){
             $nameInventory = $_POST['nameInventory']; $quantityInventory = $_POST['quantityInventory']; $quantityMinInventory = $_POST['quantityMinInventory'];
             $this->_req = "UPDATE $table SET `nom`= '$nameInventory',`quantite`= '$quantityInventory',`quantiteMin`= '$quantityMinInventory' WHERE `id` = '".$id."'";
@@ -217,12 +224,14 @@
             unset($_POST);
         }
 
+        //Supprime une founiture en BDD
         public function deleteInventory($id, $table){
             $this->_req = "DELETE FROM $table WHERE `id` = '".$id."'";
             $Result = $this->_bdd->query( $this->_req );
             unset($_POST);
         }
 
+        //Formulaire de gestion d'une fourniture
         public function formInventory($id, $table){
             $this->_req = "SELECT `nom`, `quantite`, `quantiteMin` FROM $table WHERE `id`= $id";
             $Result = $this->_bdd->query($this->_req);
